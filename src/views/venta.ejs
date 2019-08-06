@@ -1,0 +1,256 @@
+<% include header %>
+
+<% include menu-left %>
+
+<div class="component">
+    <div class="container">
+        <!-- CONTENEDOR -->
+        <div class="card my-3 shadow">
+            <!-- CABECERA -->
+            <div class="card-header header-sales">
+                <div class="row">
+                    <h1 class="h3 mb-0 pl-3 col-6 my-auto">VENTAS</h1>
+                    <label for="numberBill" class="ml-auto col-12 col-md-3 text-right align-middle my-auto">N#
+                        Factura</label>
+                    <div class="input-group col-12 col-md-3 px-0">
+                        <input type="text" class="form-control text-right" name="numberBill" id="numberBill"
+                            placeholder="123-123-1234" readonly>
+                    </div>
+                </div>
+            </div>
+            <!-- COMPONENTES -->
+            <div class="card-body">
+                <div class="body-sales py-2 px-3">
+                    <!-- CLIENTES -->
+                    <form action="/searchclient" method="GET" id="form-searchclient">
+                        <div class="row border border-dark p-3 rounded">
+                            <div class="form-group col-12 col-md-6 px-0">
+                                <label for="clientSearch" class="mb-0 font-weight-bold">Cliente</label>
+                                <div class="input-group col-12 px-0">
+                                    <input type="text" class="autocomplete form-control text-truncate"
+                                        name="clientSearch" id="clientSearch"
+                                        placeholder="Buscar por cedula, nombre o apellido" autofocus>
+                                    <div class="input-group-append" id="btnBuscarCli">
+                                        <button class="btn btn-outline-secondary" type="button" id="btnSearchCli"
+                                            data-toggle="tooltip" data-placement="bottom" title="Buscar cliente">
+                                            <li class="fa fa-search input-icon"></li>
+                                            <span class="d-none d-md-inline"></span>
+                                        </button>
+                                        <button class="btn btn-outline-success" type="button" id="btnAddClient"
+                                            data-toggle="tooltip" data-placement="bottom" title="Agregar cliente">
+                                            <li class="fa fa-plus input-icon"></li>
+                                            <span class="d-none d-md-inline"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+
+                    <div class="form-group col-12 col-md-6 ml-auto pl-0 pl-md-3  pr-0">
+                        <label for="DNICli" class="mb-0">Cedula:</label>
+                        <input type="text" class="form-control" name="DNICli" id="DNICli" readonly>
+                    </div>
+                    <div class="form-group col-12 col-md-5 pl-0">
+                        <label for="nameClient" class="mb-0">Nombre:</label>
+                        <input type="text" class="form-control" name="nameCli" id="nameCli" readonly>
+                    </div>
+                    <div class="form-group col-12 col-md-4 px-0">
+                        <label for="addressCli" class="mb-0">Direccion:</label>
+                        <input type="text" class="form-control" name="addressCli" id="addressCli" readonly>
+                    </div>
+                    <div class="form-group col-12 col-md-3 pr-0">
+                        <label for="phoneCli" class="mb-0">Telefono:</label>
+                        <input type="text" class="form-control" name="phoneCli" id="phoneCli" readonly>
+                    </div>
+                </div>
+                <!-- PRODUCTOS -->
+                <div class="row mt-4 border border-dark p-3 rounded">
+                    <div class="input-group col-12 col-md-6 px-0 mr-auto">
+                        <label for="productSearch" class="col-12 pl-0 font-weight-bold mb-0 ">Producto</label>
+                        <input type="text" class="autocomplete form-control text-truncate rounded-left"
+                            name="productSearch" id="productSearch" placeholder="Buscar por código o nombre">
+                        <div class="input-group-append" id="btnBuscarPro" style="height: 38px;">
+                            <button class="btn btn-outline-secondary" type="button" id="btnSearchPro"
+                                data-toggle="tooltip" data-placement="bottom" title="Buscar producto">
+                                <li class="fa fa-search input-icon"></li><span class="d-none d-md-inline"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 col-md-6 pr-0 ">
+                        <label for="codePro" class="col-12 pl-0 mb-0">Codigo:</label>
+                        <input type="text" class="form-control" name="codePro" id="codePro" readonly>
+                    </div>
+                    <div class="col-12 px-0">
+                        <div class="row mt-2">
+                            <div class="form-group col-12 col-md-6 px-0 ">
+                                <label for="descriptionPro" class="mb-0">Descripcion:</label>
+                                <input type="text" class="form-control" name="descriptionPro" id="descriptionPro"
+                                    readonly>
+                            </div>
+                            <div class="form-group col-12 col-md-3 pr-0">
+                                <label class="mb-0">Cantidad:
+                                    <input type="number" class="form-control" name="quantPro" id="quantPro" min="1"
+                                        value="1" onclick="this.select()">
+                                </label>
+                            </div>
+                            <div class="form-group col-12 col-md-2 offset-1 px-0">
+                                <label for="addPro" class="mb-0">&nbsp;</label>
+                                <input type="button" class="form-control btn btn-success" id="btnAddPro" value="Agregar"
+                                    name="addPro" id="addPro">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- TABLA PRODUCTOS -->
+                <div class="row my-4">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-bordered table-hover" id="tableProducts" name="tableProducts">
+                            <thead class="text-center">
+                                <tr>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Articulo</th>
+                                    <th scope="col">P. venta</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- TOTALES -->
+                <div class="row mt-1">
+                    <div class="input-group col-3 ml-auto pr-0">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Subt</span>
+                        </div>
+                        <input type="text" class="form-control text-right" id="subtotalSale" name="subtotalSale"
+                            placeholder="0" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                    </div>
+                    <div class="input-group col-3 pr-0">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">IVA</span>
+                        </div>
+                        <input type="text" class="form-control text-right" id="IVASale" name="IVASale" placeholder="0"
+                            aria-label="Username" aria-describedby="basic-addon1" readonly>
+                    </div>
+                    <div class="input-group col-3 pr-0">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Total</span>
+                        </div>
+                        <input type="text" class="form-control text-right" id="totalSale" name="totalSale"
+                            placeholder="0" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                    </div>
+                </div>
+                <!-- BOTONES -->
+                <div class="row mt-4">
+                    <div class="form-group col-12 col-md-3 ml-auto px-0">
+                        <input type="button" class="form-control btn btn-danger" value="Cancelar" name="btnCancelSale"
+                            id="btnCancelSale">
+                    </div>
+                    <div class="form-group col-12 col-md-3 pr-0">
+                        <input type="button" class="form-control btn btn-success" value="Agregar" name="btnSaveSale"
+                            id="btnSaveSale">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade align-center" id="modalPro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="exampleModalLabel">CANTIDAD INCORRECTA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center text-white">
+                SOLO EXISTEN <span id="quantityError"></span> ITEMS EN STOCK
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade align-center" id="modalCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CANCELAR COMPRA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center text-danger font-weight-bold">
+                DESEA CANCELAR ESTA COMPRA
+            </div>
+            <div class="modal-footer">
+                <button id="cancelSaleModal" type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"
+                    onclick="">No</button>
+                <button id="saveSaleModal" type="button" class="btn btn-danger btn-lg"
+                    onclick="location.href='/' ">Si</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade align-center" id="modalPayMethod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">METODO DE PAGO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center text-success font-weight-bold">
+                CUAL ES EL METODO DE PAGO
+            </div>
+            <div class="modal-footer">
+                <button id="btnCreditModal" type="button" class="btn btn-success btn-lg" data-dismiss="modal">TARJETA DE
+                    CREDITO</button>
+                <button id="btnCashModal" type="button" class="btn btn-success btn-lg"
+                    data-dismiss="modal">EFECTIVO</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade align-center" id="modalSucessSale" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-success">
+            <div class="modal-header">
+                <h5 class="modal-title text-white " id="exampleModalLabel">CORRECTO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center text-white h3">
+                LA VENTA SE HA REALIZADO EXITOSAMENTE
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade align-center" id="modalErrorSale" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="exampleModalLabel">ERROR</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center text-white font-weight-bold">
+                HA OCURRIDO UN ERROR, POR FAVOR REVISE LOS DATOS E INTENTE NUEVAMENTE
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<% include footer %>
