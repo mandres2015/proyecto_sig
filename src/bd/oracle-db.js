@@ -2,7 +2,7 @@ var oracledb = require('oracledb');
 
 var mypw = "1234"
 
-var connection
+var connection;
 
 // Conectar a la BD Oracle
 async function connect() {
@@ -10,32 +10,26 @@ async function connect() {
         connection = await oracledb.getConnection({
             user: "SYSTEM",
             password: mypw,
-<<<<<<< HEAD
-            connectString: "localhost/orclpdb"
-=======
             connectString: "localhost/XE"
->>>>>>> MODULO VENTA
         });
-        console.log("Connected");
-
-        return
-
+        console.log("DB Connected");
+        return;
     } catch (err) {
         console.error(err);
     }
 }
 
 async function close() {
-    console.log("Closed");
-    connection.close()
+    console.log("DB Closed");
+    connection.close();
 }
 
 module.exports = {
     connect: async () => {
-        await connect()
+        await connect();
     },
-    execute: (sql, params, callback) => {
-        return connection.execute(sql, params, callback)
+    execute: (sql, callback) => {
+        return connection.execute(sql, callback)
     },
     executeOptions: (sql, params, options, callback) => {
         return connection.execute(sql, params, options, callback)

@@ -1,18 +1,32 @@
 const express = require('express');
 var oracle = require("../bd/oracle-db")
 const router = express.Router();
-
+const ClienteController = require('../controllers/cliente');
 
 router.get('/', async (req, res) => {
 
     res.render('venta')
 });
 
-router.get('/clientes', (req, res)=>{
-    res.render('clientes');
-});
+router.get('/clientes', ClienteController.listarclientes);
+/*router.get('/clientes', async (req, res) => {
+    oracle.connect().then((err) => {
+        if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
 
-router.get('/productos', (req, res)=>{
+        //Ejecutar la consulta
+        oracle.execute("SELECT * FROM CLIENTE", (err, clientes) => {
+            if (!err) {
+                console.log(clientes.rows);
+                res.render('clientes', {clientes});
+            } else {
+                console.log(err + '\nNo se ha entrado al listado de clientes');
+                res.redirect('/');
+            }
+        });
+    });
+});*/
+
+router.get('/productos', (req, res) => {
     res.render('productos');
 });
 
