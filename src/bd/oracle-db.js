@@ -1,5 +1,5 @@
 var oracledb = require('oracledb');
-
+const SHA2 = require("sha2");
 var mypw = "1234"
 
 var connection
@@ -10,11 +10,7 @@ async function connect() {
         connection = await oracledb.getConnection({
             user: "SYSTEM",
             password: mypw,
-<<<<<<< HEAD
-            connectString: "localhost/orclpdb"
-=======
             connectString: "localhost/XE"
->>>>>>> MODULO VENTA
         });
         console.log("Connected");
 
@@ -45,5 +41,8 @@ module.exports = {
     },
     close: async () => {
         await close();
+    },
+    encrypt: (value) => {
+        return SHA2["SHA-224"](value)
     }
 }

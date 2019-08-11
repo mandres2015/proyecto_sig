@@ -1,12 +1,7 @@
 const path = require('path');
 const express = require('express');
-<<<<<<< HEAD
-//const morgan = require('morgan');
-=======
-const morgan = require('morgan');
-const bodyParser = require('body-parser')
->>>>>>> MODULO VENTA
 const app = express();
+var session = require('express-session')
 
 // importing routes
 const indexRoutes = require('./routes/route');
@@ -17,13 +12,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // middlewares
-<<<<<<< HEAD
 //app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}))
-=======
-app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
->>>>>>> MODULO VENTA
+app.use(session({
+  secret: "mandresdeveloper",
+  resave: false,
+  saveUninitialized: false
+}))
 
 // routes
 app.use('/', indexRoutes);
