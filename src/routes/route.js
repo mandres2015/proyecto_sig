@@ -234,7 +234,7 @@ router.post('/login', async (req, res) => {
     oracle.connect().then(() => {
         oracle.execute(`SELECT usuario FROM "SYSTEM"."USUARIO" WHERE usuario = :1`, [data.user], (err, resp) => {
             if (err) {
-                console.log(err);
+                //console.log(err);
                 res.send("Ha ocurrido un error, revise los datos en intente nuevamente")
             }
             else {

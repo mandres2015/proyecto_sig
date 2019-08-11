@@ -113,8 +113,11 @@ var productSelected = []
 /*
     BUSCAR PRODUCTO
 */
-inputPro.onkeyup = searchProduct
-btnSearchPro.onclick = searchProduct
+
+if (inputPro) {
+    inputPro.onkeyup = searchProduct
+    btnSearchPro.onclick = searchProduct
+}
 
 function searchProduct(e) {
     if (e.type == "keyup" || inputPro.value.length == 0) {
@@ -203,8 +206,10 @@ function setDataProduct(client) {
 */
 
 var tableProducts = document.getElementById("tableProducts")
-btnAddPro.onclick = addProductTable
-    .onclick = addProductTable
+if (btnAddPro) {
+    btnAddPro.onclick = addProductTable
+    // .onclick = addProductTable
+}
 
 function addProductTable() {
     let quantity = parseInt(quantPro.value)
@@ -321,7 +326,9 @@ function calculateTotal() {
     totalSale.value = round2(parseFloat(subtotalSale.value) + parseFloat(IVASale.value))
 }
 
-checkRows()
+if (tableProducts) {
+    checkRows()
+}
 
 
 
@@ -331,8 +338,10 @@ checkRows()
 var btnCancelSale = document.getElementById("btnCancelSale")
 var btnSaveSale = document.getElementById("btnSaveSale")
 
-btnCancelSale.onclick = cancelAll
-btnSaveSale.onclick = saveAll
+if (btnCancelSale) {
+    btnCancelSale.onclick = cancelAll
+    btnSaveSale.onclick = saveAll
+}
 
 function cancelAll() {
     $("#modalCancel").modal();
@@ -350,8 +359,10 @@ function saveAll() {
 var btnCashModal = document.getElementById("btnCashModal")
 var btnCreditModal = document.getElementById("btnCreditModal")
 
-btnCashModal.onclick = saveSale
-btnCreditModal.onclick = saveSale
+if (btnCashModal) {
+    btnCashModal.onclick = saveSale
+    btnCreditModal.onclick = saveSale
+}
 
 function saveSale(e) {
 
