@@ -4,11 +4,12 @@ const router = express.Router();
 const ClienteController = require('../controllers/cliente');
 
 router.get('/', async (req, res) => {
-
     res.render('venta')
 });
 
-router.get('/clientes', ClienteController.listarclientes);
+router.get('/clientes', ClienteController.listarClientes);
+router.post('/add-cliente', ClienteController.insertarCliente);
+router.get('/del-cliente/:id', ClienteController.eliminarCliente);
 /*router.get('/clientes', async (req, res) => {
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });

@@ -1,5 +1,7 @@
 var oracledb = require('oracledb');
 
+oracledb.autoCommit = true; //para que se hagan los commits automaticamente en el crud
+
 var mypw = "1234"
 
 var connection;
@@ -23,13 +25,20 @@ async function close() {
     console.log("DB Closed");
     connection.close();
 }
+async function commit(){
+    console.log('commit exitoso');
+    connection.commit();
+}
 
 module.exports = {
     connect: async () => {
         await connect();
     },
     execute: (sql, callback) => {
-        return connection.execute(sql, callback)
+        return connection.execute(sql, callback);
+    },
+    insert: (sql, callback) => {
+        return connection.execute(sql, { autoCommit: true }, callback);
     },
     executeOptions: (sql, params, options, callback) => {
         return connection.execute(sql, params, options, callback)
@@ -39,5 +48,8 @@ module.exports = {
     },
     close: async () => {
         await close();
+    },
+    commit: async()=>{
+        await commit();
     }
 }

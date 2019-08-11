@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+//const morgan = require('morgan');
 const bodyParser = require('body-parser')
 const app = express();
 
@@ -12,11 +13,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // middlewares
-app.use(express.urlencoded({extended: false}))
+//app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: false }))
 
 // routes
 app.use('/', indexRoutes);
-app.use(express.static("public"))
+app.use(express.static("public"));
 
 //Run server
 app.listen(app.get('port'), () => {
