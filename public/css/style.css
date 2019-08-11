@@ -78,10 +78,6 @@ body {
     margin-bottom: 4px;
 }
 
-.colores {
-    /* #F1EFEF #ECEBEB #423E3F #F29702 */
-}
-
 .logo {
     height: 65px;
 }
@@ -166,3 +162,24 @@ input {
 }
 
 .inputQuant:hover{background-color: rgba(0,0,0,.5);}
+
+.component-fliud{
+    height: 100vh;
+    background-color: #eeeeee;
+}
+
+.bg-login{
+    background-color: #F29702;
+}
+
+.font-color-castro{
+    color: #F29702;
+}
+
+.h-100vh{
+    height: 100vh;
+}
+
+.btn-white{
+    background: white;
+}

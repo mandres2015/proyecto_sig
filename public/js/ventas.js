@@ -12,8 +12,10 @@ var btnAddCli = document.getElementById("btnAddCli")
 /*
     BUSCAR CLIENTES
 */
-inputCli.onkeyup = searchClient
-btnSearchCli.onclick = searchClient
+if (inputCli) {
+    inputCli.onkeyup = searchClient
+    btnSearchCli.onclick = searchClient
+}
 
 function searchClient(e) {
     if (e.type == "keyup" || inputCli.value.length == 0) {

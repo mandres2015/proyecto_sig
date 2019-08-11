@@ -1,8 +1,7 @@
 const path = require('path');
 const express = require('express');
-//const morgan = require('morgan');
-const bodyParser = require('body-parser')
 const app = express();
+var session = require('express-session')
 
 // importing routes
 const indexRoutes = require('./routes/route');
@@ -14,7 +13,12 @@ app.set('view engine', 'ejs');
 
 // middlewares
 //app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: "mandresdeveloper",
+  resave: false,
+  saveUninitialized: false
+}))
 
 // routes
 app.use('/', indexRoutes);
