@@ -3,7 +3,11 @@
 
 <% include menu-left %>
 <!--Menú izquierdo-->
+<<<<<<< HEAD
 <!--% len(clientes) %>-->
+=======
+
+>>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
 <!--Estructura formulario cliente-->
 <div class="component">
     <div class="container">
@@ -18,8 +22,13 @@
             <div class="card-body">
                 <!--CARD-BODY-->
                 <div class="body-clients py-2 px-3">
+<<<<<<< HEAD
                     <!-- FORMULARIO AGREGAR CLIENTES -->
                     <form action="/add-cliente" method="POST" id="add-client">
+=======
+                    <!-- CLIENTES -->
+                    <form action="/add-client" method="GET" id="add-client">
+>>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
                         <!--INICIO BUSCAR CLIENTE -->
                         <div class="row border border-dark p-3 rounded">
                             <div class="form-group col-12 col-md-4 px-0">
@@ -31,7 +40,11 @@
                             <div class="form-group col-12 col-md-3 ml-auto px-0">
                                 <!--OPTS CIUDAD-->
                                 <label for="lblciudadCli" class="mb-0 font-weight-bold">Ciudad</label>
+<<<<<<< HEAD
                                 <select class="form-control" name="ciudadCli" id="ciudadCli">Escoja ciudad
+=======
+                                <select class="form-control" name="ciudad" id="ciudad">Escoja ciudad
+>>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
                                     <option value="default">Seleccione ciudad</option>
                                     <option value="Machala">Machala</option>
                                     <option value="Pasaje">Pasaje</option>
@@ -41,7 +54,11 @@
                             <div class="form-group col-12 col-md-4 px-0 ml-auto">
                                 <!--DIRECCION-->
                                 <label for="lbladdressCli" class="mb-0 font-weight-bold">Dirección</label>
+<<<<<<< HEAD
                                 <input type="text" rows="1" class="form-control" name="direccionCli" id="direccionCli"
+=======
+                                <input type="text" rows="1" class="form-control" name="addressCli" id="addressCli"
+>>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
                                     placeholder="Dirección">
                             </div>
 
@@ -61,7 +78,11 @@
                             <div class="form-group col-12 col-md-3 ml-auto px-0">
                                 <!--TELEFONO-->
                                 <label for="lblphoneCli" class="mb-0 font-weight-bold">Teléfono</label>
+<<<<<<< HEAD
                                 <input type="text" class="form-control" name="telefonoCli" id="telefonoCli"
+=======
+                                <input type="text" class="form-control" name="phoneCli" id="phoneCli"
+>>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
                                     placeholder="Teléfono">
                             </div>
 
@@ -69,6 +90,7 @@
                             <div class="form-group col-12 col-md-4 ml-auto px-0">
                                 <!--CORREO ELECTRONICO-->
                                 <label for="lblemail" class="mb-0 font-weight-bold">Correo</label>
+<<<<<<< HEAD
                                 <input type="text" class="form-control" name="correoCli" id="correoCli"
                                     placeholder="E-mail">
                             </div>
@@ -78,6 +100,14 @@
                     <!--FIN FORMULARIO CLIENTE -->
                 </div>
 
+=======
+                                <input type="text" class="form-control" name="email" id="email" placeholder="E-mail">
+                            </div>
+                            <button type="submit" class="form-control btn btn-info mt-4"><i class="fas fa-user-plus"></i>&nbsp; Agregar</button>
+                    </form>
+                    <!--FIN FORMULARIO CLIENTE -->
+                </div>
+>>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
                 <!-- TABLA PRODUCTOS -->
                 <div class="row my-4">
                     <h1 class="h3 mb-0 pl-3 col-6 my-auto ">Clientes registrados</h1>
@@ -95,6 +125,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+<<<<<<< HEAD
                                 <% for (var i=0; i<clientes.rows.length; i++) { %>
                                 <tr>
                                     <td class="text"><%= clientes.rows[i][0] %></td>
@@ -126,6 +157,72 @@
                                 </tr>
                                 <% } %>
 
+=======
+                                <tr>
+                                    <td class="text">123456789</td>
+                                    <td class="text-truncate">Alex Ramón</td>
+                                    <td class="text-truncate">Urbanización ciudad del sol</td>
+                                    <td class="text-truncate">0969854751</td>
+                                    <td class="text-truncate">Machala</td>
+                                    <td class="text-truncate">aaramon_est@utmachala.edu.ec</td>
+                                    <td class="text-center py-2">
+                                        <button type="button" class="btn btn-danger btn-sm mx-auto"
+                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
+                                                class="fa fa-times button-table"></span></button>
+                                        <button type="button" class="btn btn-info btn-sm mx-auto" name="btnEliminarPro"
+                                            id="btnEditarPro" value="-"><span
+                                                class="fa fa-pencil-alt button-table"></span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-truncate">7485623158</td>
+                                    <td class="text-truncate">Rodrigo Villarroel </td>
+                                    <td class="text-truncate">Ayacucho y Manuel Serrano</td>
+                                    <td class="text-truncate">0978541268</td>
+                                    <td class="text-truncate">Machala</td>
+                                    <td class="text-truncate">rvillarroel_est@utmachala.edu.ec</td>
+                                    <td class="text-center py-2">
+                                        <button type="button" class="btn btn-danger btn-sm mx-auto"
+                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
+                                                class="fa fa-times button-table"></span></button>
+                                        <button type="button" class="btn btn-info btn-sm mx-auto" name="btnEliminarPro"
+                                            id="btnEditarPro" value="-"><span
+                                                class="fa fa-pencil-alt button-table"></span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-truncate">7584965887</td>
+                                    <td class="text-truncate">Briggite Orellana</td>
+                                    <td class="text-truncate">Rayito de luz, esq</td>
+                                    <td class="text-truncate">0985413212</td>
+                                    <td class="text-truncate">Machala</td>
+                                    <td class="text-truncate">borellana_est@utmachala.edu.ec</td>
+                                    <td class="text-center py-2">
+                                        <button type="button" class="btn btn-danger btn-sm mx-auto"
+                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
+                                                class="fa fa-times button-table"></span></button>
+                                        <button type="button" class="btn btn-info btn-sm mx-auto" name="btnEliminarPro"
+                                            id="btnEditarPro" value="-"><span
+                                                class="fa fa-pencil-alt button-table"></span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="text-truncate">0780849695</td>
+                                    <td class="text-truncate">Steeven Córdova</td>
+                                    <td class="text-truncate">Manabí y Velasco Ibarra</td>
+                                    <td class="text-truncate">0967237228</td>
+                                    <td class="text-truncate">Huaquillas</td>
+                                    <td class="text-truncate">wcordova_est@utmachala.edu.ec</td>
+                                    <td class="text-center py-2">
+                                        <button type="button" class="btn btn-danger btn-sm mx-auto"
+                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
+                                                class="fa fa-times button-table"></span></button>
+                                        <button type="button" class="btn btn-info btn-sm mx-auto" name="btnEliminarPro"
+                                            id="btnEditarPro" value="-"><span
+                                                class="fa fa-pencil-alt button-table"></span></button>
+                                    </td>
+                                </tr>
+>>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
                             </tbody>
                         </table>
                     </div>
