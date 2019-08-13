@@ -1,21 +1,11 @@
 const express = require('express');
 var oracle = require("../bd/oracle-db")
 const router = express.Router();
-<<<<<<< HEAD
-const ClienteController = require('../controllers/cliente');
-=======
-
->>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
 
 
 router.get('/', async (req, res) => {
     if (req.session.user) {
         res.render('venta', { user: req.session })
-<<<<<<< HEAD
-    } else {
-        res.redirect('login')
-    }
-=======
     }
 // else {
 //        res.redirect('login')
@@ -28,7 +18,6 @@ router.get('/estadisticas', (req, res) => {
     // } else {
         res.render('stats')
     // }
->>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
 });
 
 router.get('/clientes', (req, res) => {
@@ -188,10 +177,7 @@ router.post('/saveSale', async (req, res) => {
 
 // REGISTRO DE USUARIO
 router.get('/register', async (req, res) => {
-<<<<<<< HEAD
-=======
     req.session.admin = true
->>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
     if (req.session.admin == true) {
         res.render('register')
     }
@@ -200,10 +186,7 @@ router.get('/register', async (req, res) => {
     }
 });
 router.post('/register', async (req, res) => {
-<<<<<<< HEAD
-=======
     req.session.admin = true
->>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
     if (req.session.admin == true) {
         const data = req.body
 
@@ -261,11 +244,7 @@ router.post('/login', async (req, res) => {
     oracle.connect().then(() => {
         oracle.execute(`SELECT usuario FROM "SYSTEM"."USUARIO" WHERE usuario = :1`, [data.user], (err, resp) => {
             if (err) {
-<<<<<<< HEAD
-                //console.log(err);
-=======
                 console.log(err);
->>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
                 res.send("Ha ocurrido un error, revise los datos en intente nuevamente")
             }
             else {

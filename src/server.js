@@ -1,11 +1,8 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-<<<<<<< HEAD
-=======
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
->>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
 var session = require('express-session')
 
 // importing routes
@@ -27,12 +24,6 @@ app.use(session({
 
 // routes
 app.use('/', indexRoutes);
-<<<<<<< HEAD
-app.use(express.static("public"));
-
-//Run server
-app.listen(app.get('port'), () => {
-=======
 app.use(express.static("public"))
 
 io.on('connection', function (socket) {
@@ -61,6 +52,5 @@ io.on('connection', function (socket) {
 
 //Run server
 server.listen(app.get('port'), () => {
->>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
   console.log(`server on port ${app.get('port')}`);
 });
