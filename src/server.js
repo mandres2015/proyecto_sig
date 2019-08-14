@@ -14,7 +14,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // middlewares
-//app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: "mandresdeveloper",

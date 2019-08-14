@@ -4,13 +4,10 @@
     z-index: 4;
 }
 
-<<<<<<< HEAD
-=======
 html{
     background: #F1EFEF;
 }
 
->>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
 .input-group-append .btn {
     z-index: inherit;
 }
@@ -63,13 +60,8 @@ body {
 
 .component {
     margin-left: 245px;
-<<<<<<< HEAD
-    margin-top: 65px;
-    float: right;
-=======
     margin-top: calc(65px + 16px);
     min-height: calc(100vh - 65px);
->>>>>>> c97c2ee50bccf9fe8f1ed05bdbb7b82fcd2d2b6d
     background-color: #F1EFEF;
 }
 
@@ -98,6 +90,13 @@ body {
     position: relative;
     width: 100%;
     height: 175px;
+    overflow: auto;
+}
+
+.my-custom-scrollbar-cliente {
+    position: relative;
+    width: 100%;
+    height: 200px;
     overflow: auto;
 }
 

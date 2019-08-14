@@ -23,7 +23,8 @@ $(document).ready(function () {
             type: "POST",
             data: $(this).serialize(),
             success: (res, rep) => {
-                console.log(res);
+                //console.log(res);
+                console.log('registrado');
             },
             error: function (err, errd, errs) {
                 console.log(errs);

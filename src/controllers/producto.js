@@ -1,37 +1,47 @@
 const ctrl = {};
 var oracle = require('../bd/oracle-db');
 /**
- * El controlador de la tabla cliente.
+ * El controlador de la tabla producto.
  * Se puede hacer todo lo que se desea con el cliente en la BD
+ * TABLA PRODUCTO propiedad ESTADO:
+ * 1: habilitado
+ * 0: deshabilitado
+ * select column_name from all_tab_columns where table_name = 'nombre_tabla_buscada' para obtner las columnas de una tabla
  */
-ctrl.listarClientes = async (req, res) => {
+
+ctrl.listarProductos = async (req, res) => {
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
 
         //Ejecutar la consulta
-        oracle.execute("SELECT * FROM CLIENTE", [], (err, clientes) => {
+        oracle.execute("SELECT * FROM PRODUCTO", [], (err, productos) => {
             if (!err) {
-                res.render('clientes', { clientes, user: req.session });
+                res.render('productos', { productos, user: req.session });
             } else {
-                console.log(err + '\nNo se ha entrado al listado de clientes');
+                console.log(err + '\nNo se ha entrado al listado de productos');
                 res.redirect('/');
             }
         });
     });
 }
-ctrl.insertarCliente = async (req, res) => {
+ctrl.insertarProducto = async (req, res) => {
     var params = req.body;
-    const opts = [params.cedulaCli, params.nombresCli, params.nombresCli, params.telefonoCli, params.direccionCli, params.correoCli, params.ciudadCli, '1']
-    var sql = `INSERT INTO CLIENTE(IDENTIFICACION, NOMBRES, APELLIDOS, TELEFONO, DIRECCION, CORREO, CIUDAD, ESTADO) VALUES (:a, :b, :c, :d, :e, :f, :g, :h)`
+    console.log(params);
+    const opts = [params.codeProd, params.nameProd, params.descriptionProd, parseFloat(params.precioProd), parseFloat(params.cantProd), params.estadoProd, params.ciudadProd, params.categoriaProd, parseInt(params.umedida), params.proveedorProd ]
+    console.log(opts);
+    var sql = `INSERT INTO PRODUCTO(ID, NOMBRE, DESCRIPCION, PRECIO, CANTIDAD_STOCK, ESTADO, SUCURSAL, CATEGORIA, U_MEDIDA, PROVEEDOR) VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i, :j)`
+    
+    //oracle.executeOptions(`INSERT INTO "SYSTEM"."FACTURA" (ID, CLIENTE, IVA, DESCUENTO, SUBTOTAL, TOTAL, ESTADO, FORMA_DE_PAGO, FECHA) VALUES (:a,:b,:c,:d,:e,:f,:g,:h,:i)`, opts, { autoCommit: true }, (ex, bill) => {
+    //console.log(sql); //imprimiendo la consulta de inserción
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
         //Ejecutar la inserción en BD
         oracle.executeOptions(sql, opts, { autoCommit: true }, (err, result) => {
             if (!err) {
-                console.log('Cliente ingresado con éxito');
+                console.log('Producto ingresado con éxito');
                 //oracle.commit();
-                oracle.execute("SELECT * FROM CLIENTE", [], (err, clientes) => {
-                    if (!err) res.render('clientes', { clientes, user: req.session });
+                oracle.execute("SELECT * FROM PRODUCTO", [], (err, productos) => {
+                    if (!err) res.render('productos', { productos, user: req.session });
                 });
             } else {
                 console.log(result);
@@ -42,37 +52,38 @@ ctrl.insertarCliente = async (req, res) => {
         });
     });
 }
-ctrl.obtenerCliente = async (req, res) => {
+ctrl.obtenerProducto = async (req, res) => {
     const { id } = req.params;
-    //console.log('id recibido para actualizar: ' + id);
-    const sql = `SELECT * FROM CLIENTE WHERE IDENTIFICACION = :a`
+    console.log('id recibido para actualizar: ' + id);
+    const sql = `SELECT * FROM PRODUCTO WHERE ID = :a`
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
-        oracle.execute(sql, [id], (err, cliente) => {
+        oracle.execute(sql, [id], (err, producto) => {
             if (!err) {
-                //console.log(cliente.rows); // se obtiene el cliente
-                // renderizar la pagina de actualizar enviando los datos del cliente
-                res.render('edit_cliente', { cliente });
+                console.log(producto.rows); // se obtiene el producto
+                // renderizar la pagina de actualizar enviando los datos del producto
+                res.render('edit_producto', { producto });
             }
-        })
-    })
+        });
+    });
 }
-ctrl.updateCliente = async (req, res) => {
-    //console.log(req.body);
-    //console.log(req.params);
+ctrl.updateProducto = async (req, res) => {
+    console.log(req.body);
+    console.log(req.params);
     var params = req.body;
-    const opts = [params.nombresCli, params.nombresCli, params.telefonoCli, params.direccionCli, params.correoCli, params.ciudadCli, '1', req.params.id]
-    var sql = `UPDATE CLIENTE SET NOMBRES = :a, APELLIDOS = :b, TELEFONO = :c, DIRECCION = :d, CORREO = :e, CIUDAD = :f, ESTADO = :g WHERE IDENTIFICACION=:h`
+    const opts = [params.nameProd, params.descriptionProd, params.precioProd, params.cantProd, params.estadoProd, params.ciudadProd, params.categoriaProd, params.umedida, params.proveedorProd, req.params.id ]
+    var sql = `UPDATE CLIENTE SET NOMBRE = :a, DESCRIPCION = :b, PRECIO = :c, CANTIDAD_STOCK = :d, ESTADO = :e, SUCURSAL = :f, CATEGORIA = :g, U_MEDIDA = :h, PROVEEDOR = :i
+    WHERE ID=:j`
     console.log(sql, opts);
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
         //Ejecutar la actualización en BD
         oracle.executeOptions(sql, opts, { autoCommit: true }, (err, result) => {
             if (!err) {
-                console.log('Cliente actualizado con éxito');
+                console.log('Producto actualizado con éxito');
                 console.log(result);
-                oracle.execute("SELECT * FROM CLIENTE", [], (err, clientes) => {
-                    if (!err) res.render('clientes', { clientes, user: req.session });
+                oracle.execute("SELECT * FROM PRODUCTO", [], (err, productos) => {
+                    if (!err) res.render('productos', { productos, user: req.session });
                 });
             } else {
                 console.log(err + '\nNo se ha podido actualizar el registro');
@@ -82,14 +93,14 @@ ctrl.updateCliente = async (req, res) => {
         });
     });
 }
-ctrl.updateEstadoCliente = async (req, res) => {
+ctrl.updateEstadoProducto = async (req, res) => {
     const { id } = req.params;
     var opts = [id];
     console.log('id recibido para actualizar: ' + id);
-    const sql = `UPDATE CLIENTE SET ESTADO = :a WHERE IDENTIFICACION = :b`;
+    const sql = `UPDATE PRODUCTO SET ESTADO = :a WHERE ID = :b`;
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
-        oracle.execute(`SELECT ESTADO FROM CLIENTE WHERE IDENTIFICACION = :a`, opts, (err, estado) => {
+        oracle.execute(`SELECT ESTADO FROM PRODUCTO WHERE ID = :a`, opts, (err, estado) => {
             if (!err) {
                 console.log("estado:--> " + estado.rows[0][0]); //obtienen el estado desde la BD
                 estado = cambiarEstado(estado);
@@ -98,7 +109,7 @@ ctrl.updateEstadoCliente = async (req, res) => {
                 oracle.executeOptions(sql, opts, { autoCommit: true }, (err, result) => {
                     if (!err) {
                         console.log('Estado actualizado');
-                        res.redirect('/clientes');
+                        res.redirect('/productos');
                         /*oracle.execute("SELECT * FROM CLIENTE", [], (err, clientes) => {
                             if (!err) res.render('clientes', { clientes, user: req.session });
                         });*/
@@ -119,24 +130,6 @@ function cambiarEstado(estado) {
     return estado;
 }
 
-/*ctrl.eliminarCliente = async (req, res)=>{
-    var id = req.body.cedulaCli;
-    
-    bd.connect().then((err)=>{
-        if(err) return res.status(200).send({message: 'Ha ocurrido un error'});
-        bd.execute(`DELETE FROM CLIENTE WHERE identificacion='${id}'`, (err, result)=>{
-            if(!err){
-                console.log('Cliente eliminado', {result});
-                bd.commit();
-                res.redirect('/');
-            }else{
-                console.log(err+ '\nNo se pudo eliminar');
-                bd.close();
-                res.redirect('/');
-            }
-        });
-    });
-}*/
 
 
 module.exports = ctrl;

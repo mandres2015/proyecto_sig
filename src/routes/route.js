@@ -7,26 +7,52 @@ router.get('/', async (req, res) => {
     if (req.session.user) {
         res.render('venta', { user: req.session })
     }
-// else {
-//        res.redirect('login')
-//    }
+    else {
+        res.redirect('login')
+    }
 });
 
 router.get('/estadisticas', (req, res) => {
-    // if (req.session.user) {
-        // res.render('stats', { user: req.session });
-    // } else {
+    if (req.session.user) {
+        res.render('stats', { user: req.session });
+    } else {
         res.render('stats')
-    // }
+    }
 });
 
-router.get('/clientes', (req, res) => {
+/**
+ * Mi parte, no borrar, hacer:
+ * 1. commit
+ * 2. push
+ * 3. pull
+ * En caso de error al hacer pull, ingresar:
+ * pull --allow-unrelated-histories
+ */
+
+//controlador para cliente
+const clientController = require('../controllers/cliente');
+router.get('/clientes', clientController.listarClientes);
+router.post('/add-cliente', clientController.insertarCliente);
+router.get('/habilitar-cliente/:id', clientController.updateEstadoCliente);
+router.get('/edit-cliente/:id', clientController.obtenerCliente); //obtener un cliente
+router.post('/edit-cliente/:id', clientController.updateCliente); //actualizar el cliente
+
+//controlador para productos
+const productController = require('../controllers/producto');
+router.get('/productos', productController.listarProductos);
+router.post('/add-producto', productController.insertarProducto);
+router.get('/habilitar-producto/:id', productController.updateEstadoProducto);
+router.get('/edit-producto/:id', productController.obtenerProducto);
+router.post('/edit-producto/:id', productController.updateProducto);
+
+
+/*router.get('/clientes', (req, res) => {
     if (req.session.user) {
         res.render('clientes', { user: req.session });
     } else {
         res.redirect('login')
     }
-});
+});*/
 
 router.get('/productos', (req, res) => {
     if (req.session.user) {
@@ -220,17 +246,18 @@ router.post('/register', async (req, res) => {
                                 }
                                 else {
                                     console.log(resp);
-                                    res.send("Usuario registrado correctamente")
+                                    console.log("Usuario registrado correctamente");
+                                    res.render('venta');
                                 }
-                                oracle.close()
+                                //oracle.close()
                             })
                         }
                     }
                 })
             })
+            res.redirect('/');
         }
-    }
-    else {
+    } else {
         res.redirect('login')
     }
 });
@@ -259,13 +286,14 @@ router.post('/login', async (req, res) => {
                         }
                         else {
                             req.session.user = data.user
-                            if (resp2.rows[0].toString() === "admin") {
+                            console.log(resp2.rows[0][0]);
+                            if (resp2.rows[0][0] === "admin") {
                                 req.session.admin = true
                             }
-                            else{
+                            else {
                                 req.session.admin = false
                             }
-                            console.log(resp2)
+                            //console.log(resp2)
                             res.send('200')
                         }
                     })

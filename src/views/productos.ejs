@@ -15,87 +15,83 @@
             <!-- COMPONENTES -->
             <div class="card-body">
                 <div class="body-sales py-2 px-3">
-
-                    <!-- PRODUCTOS -->
-                    <div class="row mt-4 border border-dark p-3 rounded">
-                        <!--idProducto podría ser el codigo de barras o cualquiera asignado por la ferreteria-->
-                        <div class="form-group col-12 col-md-6 pr-0 ">
-                            <label for="codePro" class="col-12 pl-0 mb-0">Codigo:</label>
-                            <input type="text" class="form-control" name="codePro" id="codePro">
-                        </div>
-                        <div class="form-group col-12 col-md-6 pr-0 ">
-                            <label for="nameProd" class="col-12 pl-0 mb-0">Producto:</label>
-                            <input type="text" class="form-control" name="nameProd" id="nameProd">
-                        </div>
-                        <div class="form-group col-12 col-md-6 pr-0 ">
-                            <label for="descriptionProd" class="col-12 pl-0 mb-0">Descripción:</label>
-                            <input type="text" class="form-control" name="descriptionProd" id="descriptionProd">
-                        </div>
-                        <div class="form-group col-12 col-md-6 pr-0 ">
-                            <label for="categoriaProd" class="col-12 pl-0 mb-0">Categoria:</label>
-                            <select class="form-control" name="categoria" id="categoria">Escoja categoria
-                                <option value="default">General</option>
-                                <option value="Machala">Electrico</option>
-                                <option value="Pasaje">Ceramica</option>
-                                <option value="Huaquillas">Pinturas</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-12 col-md-6 pr-0 ">
-                            <label for="descriptionProd" class="col-12 pl-0 mb-0">Ubicación:</label>
-                            <select class="form-control" name="ciudad" id="ciudad">Escoja ciudad
-                                <option value="default">Seleccione ciudad</option>
-                                <option value="Machala">Machala</option>
-                                <option value="Pasaje">Pasaje</option>
-                                <option value="Huaquillas">Huaquillas</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-12 col-md-6 pr-0 ">
-                            <label for="precioProd" class="col-12 pl-0 mb-0">Precio:</label>
-                            <input type="text" class="form-control" name="precioProd" id="precioProd">
-                        </div>
-                        <div class="form-group col-12 col-md-3 pr-0">
-                            <label class="mb-0">Cantidad:
-                                <input type="number" class="form-control" name="quantPro" id="quantPro" min="1"
-                                    value="1" onclick="this.select()">
-                            </label>
-                        </div>
-                        <div class="form-group col-4 col-md-3 pr-0 ">
-                            <label for="umedidaProd" class="col-6 pl-0 mb-0 ml-auto">U. Medida:</label>
-                            <select class=" form group form-control" name="umedida" id="umedida">
-                                <option value="default">Seleccione unidad</option>
-                                <option value="pieza">Pieza</option>
-                                <option value="kit">Kit</option>
-                                <option value="caja">Caja</option>
-                                <option value="juego">Juego</option>
-                                <option value="kg">Kilos</option>
-                                <option value="lbs">Libras</option>
-                                <option value="lts">Litros</option>
-                                <option value="glns">Galones</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-12 col-md-3 pr-0 ">
-                            <label for="proveedorProd" class="col-12 pl-0 mb-0">Proveedor:</label>
-                            <input type="text" class="form-control" name="proveedorProd" id="proveedorProd">
-                        </div>
-                        <div class="row mt-4">
-                            <div class="row">
-                                <div class="form-group col-12 col-md-12 pr-0 ">
-                                    <input type="checkbox" name="estadoProd" id="estadoProd">Es visible<br>
+                    <form action="/add-producto" method="POST" id="add-producto">
+                        <!-- PRODUCTOS -->
+                        <div class="row mt-4 border border-dark p-3 rounded">
+                            <!--idProducto podría ser el codigo de barras o cualquiera asignado por la ferreteria-->
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="codePro" class="col-12 pl-0 mb-0">Codigo:</label>
+                                <input type="text" class="form-control" name="codeProd" id="codePro">
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="nameProd" class="col-12 pl-0 mb-0">Producto:</label>
+                                <input type="text" class="form-control" name="nameProd" id="nameProd">
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="descriptionProd" class="col-12 pl-0 mb-0">Descripción:</label>
+                                <input type="text" class="form-control" name="descriptionProd" id="descriptionProd">
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="categoriaProd" class="col-12 pl-0 mb-0">Categoria:</label>
+                                <select class="form-control" name="categoriaProd" id="categoriaProd">Escoja categoria
+                                    <option value="General">General</option>
+                                    <option value="Herramienta">Herramienta</option>
+                                    <option value="Electrico">Electrico</option>
+                                    <option value="Ceramica">Ceramica</option>
+                                    <option value="Pinturas">Pinturas</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="descriptionProd" class="col-12 pl-0 mb-0">Ubicación:</label>
+                                <select class="form-control" name="ciudadProd" id="ciudadProd">Escoja sucursal
+                                    <option value="default">Seleccione ciudad</option>
+                                    <option value="Machala">Machala</option>
+                                    <option value="Pasaje">Pasaje</option>
+                                    <option value="Huaquillas">Huaquillas</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="umedidaProd" class="col-6 pl-0 mb-0 ml-auto">U. Medida:</label>
+                                <select class=" form group form-control" name="umedida" id="umedida">
+                                    <option value="0">Seleccione unidad</option>
+                                    <option value="1">Pieza</option>
+                                    <option value="2">Kit</option>
+                                    <option value="3">Caja</option>
+                                    <option value="4">Juego</option>
+                                    <option value="5">Kilos</option>
+                                    <option value="6">Libras</option>
+                                    <option value="7">Litros</option>
+                                    <option value="8">Galones</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12 col-md-3 pr-0">
+                                <label class="mb-0">Cantidad:
+                                    <input type="number" class="form-control" name="cantProd" id="cantProd" min="1"
+                                        value="1" onclick="this.select()">
+                                </label>
+                            </div>
+                            <div class="form-group col-4 col-md-3 pr-0 ">
+                                <label for="precioProd" class="col-12 pl-0 mb-0">Precio:</label>
+                                <input type="number" min="0" step=".01" class="form-control" name="precioProd"
+                                    id="precioProd">
+                            </div>
+                            <div class="form-group col-12 col-md-4 pr-0 ">
+                                <label for="proveedorProd" class="col-12 pl-0 mb-0">Proveedor:</label>
+                                <input type="text" class="form-control" name="proveedorProd" id="proveedorProd">
+                            </div>
+                            <div class="row mt-4">
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-12 pr-0 ">
+                                        <input type="checkbox" name="estadoProd" id="estadoProd">&nbsp; Es visible<br>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-12 col-md-12 pr-0 ">
-                                    <input type="checkbox" name="existenciaProd" id="existenciaProd"> En Existencia<br>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-12 col-md-2 offset-1 px-0">
-                            <label for="addPro" class="mb-0">&nbsp;</label>
-                            <button type="submit" class="form-control btn btn-info" name="addPro" id="addPro"><i
-                                    class="fas fa-plus"></i>&nbsp;Agregar
+                            <button type="submit" class="form-control btn btn-info mt-4" name="addProd" id="addProd"><i
+                                class="fas fa-plus"></i>&nbsp;Agregar
                             </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <!-- TABLA PRODUCTOS -->
                 <div class="row my-4">
@@ -119,17 +115,22 @@
                                 <tr>
                                     <th scope="col">Codigo</th>
                                     <th scope="col">Articulo</th>
+                                    <th scope="col">Categoria</th>
                                     <th scope="col">P. venta</th>
                                     <th scope="col">Cantidad</th>
+                                    <th scope="col">Sucursal</th>
                                     <th scope="col">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <% for (var i=0; i<productos.rows.length; i++) { %>
                                 <tr>
-                                    <td scope="row" class="text-truncate">cxzzxczxczxxczxczxc1</td>
-                                    <td class="text-truncate">gdf</td>
-                                    <td class="text-truncate">gdff</td>
-                                    <td class="text-truncate">Otzxczxczxczto</td>
+                                    <td class="text-truncate"><%= productos.rows[i][0] %></td>
+                                    <td class="text-truncate"><%= productos.rows[i][1] %></td>
+                                    <td class="text-truncate"><%= productos.rows[i][7] %></td>
+                                    <td class="text-truncate"><%= productos.rows[i][3] %></td>
+                                    <td class="text-truncate"><%= productos.rows[i][4] %></td>
+                                    <td class="text-truncate"><%= productos.rows[i][6] %></td>
                                     <td class="text-center py-2">
                                         <button type="button" class="btn btn-danger btn-sm mx-auto"
                                             name="btnEliminarPro" id="btnEditarPro" value="-"><span
@@ -139,48 +140,7 @@
                                                 class="fa fa-pencil-alt button-table"></span></button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td scope="row" class="text-truncate">cxzzxczxczxxczxczxc1</td>
-                                    <td class="text-truncate">Mazxczxczxczxczxcrk</td>
-                                    <td class="text-truncate">Otzczxczxxczxxczxto</td>
-                                    <td class="text-truncate">Otzxczxczxczto</td>
-                                    <td class="text-center py-2">
-                                        <button type="button" class="btn btn-danger btn-sm mx-auto"
-                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
-                                                class="fa fa-times button-table"></span></button>
-                                        <button type="button" class="btn btn-info btn-sm mx-auto" name="btnEliminarPro"
-                                            id="btnEditarPro" value="-"><span
-                                                class="fa fa-pencil-alt button-table"></span></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" class="text-truncate">cxzzxczxczxxczxczxc1</td>
-                                    <td class="text-truncate">Mazxczxczxczxczxcrk</td>
-                                    <td class="text-truncate">@mzxczxczxczcdo</td>
-                                    <td class="text-truncate">Otzxczxczxczto</td>
-                                    <td class="text-center py-2">
-                                        <button type="button" class="btn btn-danger btn-sm mx-auto"
-                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
-                                                class="fa fa-times button-table"></span></button>
-                                        <button type="button" class="btn btn-info btn-sm mx-auto" name="btnEliminarPro"
-                                            id="btnEditarPro" value="-"><span
-                                                class="fa fa-pencil-alt button-table"></span></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row" class="text-truncate">cxzzxczxczxxczxczxc1</td>
-                                    <td class="text-truncate">Otzczxczxxczxxczxto</td>
-                                    <td class="text-truncate">@mzxczxczxczcdo</td>
-                                    <td class="text-truncate">Otzxczxczxczto</td>
-                                    <td class="text-center py-2">
-                                        <button type="button" class="btn btn-danger btn-sm mx-auto"
-                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
-                                                class="fa fa-times button-table"></span></button>
-                                        <button type="button" class="btn btn-info btn-sm mx-auto" name="btnEliminarPro"
-                                            id="btnEditarPro" value="-"><span
-                                                class="fa fa-pencil-alt button-table"></span></button>
-                                    </td>
-                                </tr>
+                                <% } %>
                             </tbody>
                         </table>
                     </div>
