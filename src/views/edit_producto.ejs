@@ -1,0 +1,86 @@
+<% include header %>
+<!--Header-->
+
+<% include menu-left %>
+<!--Menú izquierdo-->
+
+<div class="component">
+    <div class="container">
+        <!--CARD PARA REGISTRO DE CLIENTES-->
+        <div class="card my-3 shadow">
+            <div class="card-header header-sales">
+                <!--CARD-HEADER-->
+                <div class="row">
+                    <h1 class="h3 mb-0 pl-3 col-6 my-auto">EDITAR CLIENTE</h1>
+                </div>
+            </div>
+            <div class="card-body">
+                <!--CARD-BODY-->
+                <div class="body-clients py-2 px-3">
+                    <!-- FORMULARIO ACTUALIZAR CLIENTE -->
+                    <form action="/edit-cliente/<%= cliente.rows[0][0] %>" method="POST" id="edit-client">
+                        <!--INICIO BUSCAR CLIENTE -->
+                        <div class="row border border-dark p-3 rounded">
+                            <div class="form-group col-12 col-md-4 px-0">
+                                <!--CEDULA-->
+                                <label for="lblcedulaCli" class="mb-0 font-weight-bold">Cédula/DNI</label>
+                                <input type="text" class="form-control" name="cedulaCli" id="cedulaCli"
+                                    value="<%= cliente.rows[0][0] %>" placeholder="Cédula" disabled>
+                            </div>
+                            <div class="form-group col-12 col-md-3 ml-auto px-0">
+                                <!--OPTS CIUDAD-->
+                                <label for="lblciudadCli" class="mb-0 font-weight-bold">Ciudad</label>
+                                <select class="form-control" name="ciudadCli" id="ciudadCli">Escoja ciudad
+                                    <option value="<%= cliente.rows[0][6] %>"><%= cliente.rows[0][6] %></option>
+                                    <option value="Machala">Machala</option>
+                                    <option value="Pasaje">Pasaje</option>
+                                    <option value="Huaquillas">Huaquillas</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12 col-md-4 px-0 ml-auto">
+                                <!--DIRECCION-->
+                                <label for="lbladdressCli" class="mb-0 font-weight-bold">Dirección</label>
+                                <input type="text" rows="1" class="form-control" name="direccionCli" id="direccionCli"
+                                    placeholder="Dirección" value="<%= cliente.rows[0][4] %>">
+                            </div>
+
+                            <div class="form-group col-12 col-md-4  pl-0 pr-0">
+                                <!--NOMBRES-->
+                                <label for="lblnombresCli" class="mb-0 font-weight-bold">Nombres y apellidos</label>
+                                <input type="text" class="form-control" name="nombresCli" id="nombresCli"
+                                    value="<%= cliente.rows[0][1] %>" placeholder="Nombres">
+                            </div>
+                            <!--APELLIDOS
+        <div class="form-group col-12 col-md-4 ml-auto px-0">
+            
+            <label for="lblapellidosCli" class="mb-0 font-weight-bold">Apellidos</label>
+            <input type="text" class="form-control" name="apellidosCli" id="apellidosCli"
+                placeholder="Apellidos">
+        </div>-->
+                            <div class="form-group col-12 col-md-3 ml-auto px-0">
+                                <!--TELEFONO-->
+                                <label for="lblphoneCli" class="mb-0 font-weight-bold">Teléfono</label>
+                                <input type="text" class="form-control" name="telefonoCli" id="telefonoCli"
+                                    value="<%= cliente.rows[0][3] %>" placeholder="Teléfono">
+                            </div>
+
+
+                            <div class="form-group col-12 col-md-4 ml-auto px-0">
+                                <!--CORREO ELECTRONICO-->
+                                <label for="lblemail" class="mb-0 font-weight-bold">Correo</label>
+                                <input type="email" class="form-control" name="correoCli" id="correoCli"
+                                    value="<%= cliente.rows[0][5] %>" placeholder="E-mail"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                            </div>
+                            <button type="submit" class="form-control btn btn-info mt-4"><i
+                                    class="fas fa-user-plus"></i>&nbsp;
+                                Actualizar</button>
+                    </form>
+                    <!--FIN FORMULARIO CLIENTE -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include footer %>
+<!--Pie de página-->

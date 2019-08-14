@@ -87,9 +87,8 @@
                                 </div>
                             </div>
                             <button type="submit" class="form-control btn btn-info mt-4" name="addProd" id="addProd"><i
-                                class="fas fa-plus"></i>&nbsp;Agregar
+                                    class="fas fa-plus"></i>&nbsp;Agregar
                             </button>
-                            </div>
                         </div>
                     </form>
                 </div>
@@ -132,12 +131,12 @@
                                     <td class="text-truncate"><%= productos.rows[i][4] %></td>
                                     <td class="text-truncate"><%= productos.rows[i][6] %></td>
                                     <td class="text-center py-2">
-                                        <button type="button" class="btn btn-danger btn-sm mx-auto"
-                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
-                                                class="fa fa-times button-table"></span></button>
                                         <button type="button" class="btn btn-info btn-sm mx-auto" name="btnEliminarPro"
                                             id="btnEditarPro" value="-"><span
                                                 class="fa fa-pencil-alt button-table"></span></button>
+                                        <button type="button" class="btn btn-danger btn-sm mx-auto"
+                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
+                                                class="fa fa-times button-table"></span></button>
                                     </td>
                                 </tr>
                                 <% } %>
@@ -148,7 +147,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 
