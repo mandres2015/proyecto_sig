@@ -12,7 +12,7 @@ async function connect() {
             password: mypw,
             connectString: "localhost/XE"
         });
-        console.log("Connected");
+        console.log("TU BD HA SIDO CONECTADA");
 
         return
 
