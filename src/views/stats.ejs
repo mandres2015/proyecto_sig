@@ -4,48 +4,35 @@
 
 <div class="component">
     <div class="container">
-        <input type="button" name="d" id="d" value="sdsd">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h6 class="card-title">
-                            Total Ventas
-                        </h6>
-                    </div>
+        <div class="card mb-4">
+            <div class="top-products row p-4">
+                <div class="col-12 m-0 p-0 d-flex justify-content-between">
+                    <h1 class="h4">TOP 5 PRODUCTOS MÁS VENDIDOS</h1>
+                    <select class="col-4 custom-select" name="sucursalTopFive" id="sucursalTopFive">
+                        <option value="MATRIZ">MATRIZ</option>
+                        <option value="SUCURSAL 1">SUCURSAL 1</option>
+                    </select>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Total Compras
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-body row">
-                        <div class="col-8">
-                            <p class="card-title">
-                                Total Ganancias
-                            </p>
-                            <h2>254k</h2>
-                        </div>
-                        <div class="col-4">
-                            <li class="fa fa-money-check-alt text-primary" style="font-size-adjust: 50px;"></li>
-                        </div>
-                    </div>
-                </div>
+                <div id="TopProduct" class="col-lg-12"></div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="card p-4">
-                <canvas id="myChart" height="100px" width="auto"></canvas>
+        <div class="card">
+            <div class="top-products row p-4">
+                <div class="col-12 m-0 p-0 d-flex justify-content-between">
+                    <h1 class="h4">TOTAL VENTAS REALIZADAS</h1>
+                    <select class="col-4 custom-select" name="salePeriod" id="salePeriod">
+                        <option value="1">MES</option>
+                        <option value="3">TRIMESTRE</option>
+                        <option value="6">SEMESTRE</option>
+                        <option value="12">AÑO</option>
+                    </select>
+                </div>
+                <div id="TopSale" class="col-lg-12"></div>
             </div>
         </div>
     </div>
 </div>
 
+<% include complements %>
+<script src="/js/stats.js"></script>
 <% include footer %>

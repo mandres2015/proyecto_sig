@@ -63,6 +63,7 @@ body {
     margin-top: calc(65px + 16px);
     min-height: calc(100vh - 65px);
     background-color: #F1EFEF;
+    margin-bottom: 16px;
 }
 
 .row {
