@@ -11,69 +11,93 @@
             <div class="card-header header-sales">
                 <!--CARD-HEADER-->
                 <div class="row">
-                    <h1 class="h3 mb-0 pl-3 col-6 my-auto">EDITAR CLIENTE</h1>
+                    <h1 class="h3 mb-0 pl-3 col-6 my-auto">EDITAR PRODUCTO</h1>
                 </div>
             </div>
             <div class="card-body">
                 <!--CARD-BODY-->
                 <div class="body-clients py-2 px-3">
                     <!-- FORMULARIO ACTUALIZAR CLIENTE -->
-                    <form action="/edit-cliente/<%= cliente.rows[0][0] %>" method="POST" id="edit-client">
-                        <!--INICIO BUSCAR CLIENTE -->
+                    <form action="/edit-producto/<%= producto.rows[0][0] %>" method="POST" id="edit-product" onsubmit="alert('Producto actualizado')">
+                        <!--EDITAR PRODUCTO -->
                         <div class="row border border-dark p-3 rounded">
-                            <div class="form-group col-12 col-md-4 px-0">
-                                <!--CEDULA-->
-                                <label for="lblcedulaCli" class="mb-0 font-weight-bold">Cédula/DNI</label>
-                                <input type="text" class="form-control" name="cedulaCli" id="cedulaCli"
-                                    value="<%= cliente.rows[0][0] %>" placeholder="Cédula" disabled>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="codePro" class="col-12 pl-0 mb-0">Codigo:</label>
+                                <input type="text" class="form-control" name="codeProd" id="codePro" 
+                                value="<%= producto.rows[0][0]%>" disabled>
                             </div>
-                            <div class="form-group col-12 col-md-3 ml-auto px-0">
-                                <!--OPTS CIUDAD-->
-                                <label for="lblciudadCli" class="mb-0 font-weight-bold">Ciudad</label>
-                                <select class="form-control" name="ciudadCli" id="ciudadCli">Escoja ciudad
-                                    <option value="<%= cliente.rows[0][6] %>"><%= cliente.rows[0][6] %></option>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="nameProd" class="col-12 pl-0 mb-0">Producto:</label>
+                                <input type="text" class="form-control" name="nameProd" id="nameProd" value="<%= producto.rows[0][1]%>" required>
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="descriptionProd" class="col-12 pl-0 mb-0">Descripción:</label>
+                                <input type="text" class="form-control" name="descriptionProd" id="descriptionProd"
+                                    required value="<%= producto.rows[0][2]%>">
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="categoriaProd" class="col-12 pl-0 mb-0">Categoria:</label>
+                                <select class="form-control" name="categoriaProd" id="categoriaProd" required>Escoja
+                                    categoria
+                                    <option value="<%= producto.rows[0][7]%>"><%= producto.rows[0][7]%></option>
+                                    <option value="Herramienta">Herramienta</option>
+                                    <option value="Electrico">Electrico</option>
+                                    <option value="Ceramica">Ceramica</option>
+                                    <option value="Pinturas">Pinturas</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="descriptionProd" class="col-12 pl-0 mb-0">Ubicación:</label>
+                                <select class="form-control" name="ciudadProd" id="ciudadProd" required>Escoja sucursal
+                                    <option value="<%= producto.rows[0][6]%>"><%= producto.rows[0][6]%></option>
                                     <option value="Machala">Machala</option>
                                     <option value="Pasaje">Pasaje</option>
                                     <option value="Huaquillas">Huaquillas</option>
                                 </select>
                             </div>
-                            <div class="form-group col-12 col-md-4 px-0 ml-auto">
-                                <!--DIRECCION-->
-                                <label for="lbladdressCli" class="mb-0 font-weight-bold">Dirección</label>
-                                <input type="text" rows="1" class="form-control" name="direccionCli" id="direccionCli"
-                                    placeholder="Dirección" value="<%= cliente.rows[0][4] %>">
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="umedidaProd" class="col-6 pl-0 mb-0 ml-auto">U. Medida:</label>
+                                <select class=" form group form-control" name="umedida" id="umedida" required>
+                                    <option value=""><%= producto.rows[0][8]%></option>
+                                    <!--Poner el condicional para los casos de la unidad de medida-->
+                                    <option value="1">Pieza</option>
+                                    <option value="2">Kit</option>
+                                    <option value="3">Caja</option>
+                                    <option value="4">Juego</option>
+                                    <option value="5">Kilos</option>
+                                    <option value="6">Libras</option>
+                                    <option value="7">Litros</option>
+                                    <option value="8">Galones</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12 col-md-3 pr-0">
+                                <label class="mb-0">Cantidad:
+                                    <input type="number" class="form-control" name="cantProd" id="cantProd" min="1"
+                                        value="<%= producto.rows[0][4]%>" onclick="this.select()">
+                                </label>
+                            </div>
+                            <div class="form-group col-4 col-md-3 pr-0 ">
+                                <label for="precioProd" class="col-12 pl-0 mb-0">Precio:</label>
+                                <input type="number" min="0" step=".01" class="form-control" name="precioProd" value="<%= producto.rows[0][3]%>"
+                                    id="precioProd" required>
+                            </div>
+                            <div class="form-group col-12 col-md-4 pr-0 ">
+                                <label for="proveedorProd" class="col-12 pl-0 mb-0">Proveedor:</label>
+                                <input type="text" class="form-control" name="proveedorProd" id="proveedorProd"
+                                    required value="<%= producto.rows[0][9]%>">
+                            </div>
+                            <div class="row mt-4">
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-12 pr-0 ">
+                                        <input type="checkbox" name="estadoProd" id="estadoProd" checked>&nbsp;
+                                        <!-- value="<%= producto.rows[0][5]=='1'? 'true': 'false' %>">&nbsp;-->
+                                        Es visible<br>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group col-12 col-md-4  pl-0 pr-0">
-                                <!--NOMBRES-->
-                                <label for="lblnombresCli" class="mb-0 font-weight-bold">Nombres y apellidos</label>
-                                <input type="text" class="form-control" name="nombresCli" id="nombresCli"
-                                    value="<%= cliente.rows[0][1] %>" placeholder="Nombres">
-                            </div>
-                            <!--APELLIDOS
-        <div class="form-group col-12 col-md-4 ml-auto px-0">
-            
-            <label for="lblapellidosCli" class="mb-0 font-weight-bold">Apellidos</label>
-            <input type="text" class="form-control" name="apellidosCli" id="apellidosCli"
-                placeholder="Apellidos">
-        </div>-->
-                            <div class="form-group col-12 col-md-3 ml-auto px-0">
-                                <!--TELEFONO-->
-                                <label for="lblphoneCli" class="mb-0 font-weight-bold">Teléfono</label>
-                                <input type="text" class="form-control" name="telefonoCli" id="telefonoCli"
-                                    value="<%= cliente.rows[0][3] %>" placeholder="Teléfono">
-                            </div>
-
-
-                            <div class="form-group col-12 col-md-4 ml-auto px-0">
-                                <!--CORREO ELECTRONICO-->
-                                <label for="lblemail" class="mb-0 font-weight-bold">Correo</label>
-                                <input type="email" class="form-control" name="correoCli" id="correoCli"
-                                    value="<%= cliente.rows[0][5] %>" placeholder="E-mail"
-                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                            </div>
                             <button type="submit" class="form-control btn btn-info mt-4"><i
-                                    class="fas fa-user-plus"></i>&nbsp;
+                                    class="fas fa-edit"></i>&nbsp;
                                 Actualizar</button>
                     </form>
                     <!--FIN FORMULARIO CLIENTE -->
@@ -82,5 +106,21 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        estado = $("#estadoProd").val();
+        console.log("Valor del input checkbox: "+estado);
+        if(estado=='true'){
+            $("#estadoProd").prop("checked",true);
+        }
+        /*var chk = $('#estadoProd').is(":checked");
+        if(!chk){
+            console.log(chk);
+            alert('Checkbox vacío')
+        }*/
+    });
+</script>
+
 <% include footer %>
 <!--Pie de página-->

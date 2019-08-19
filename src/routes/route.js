@@ -44,6 +44,7 @@ router.post('/add-producto', productController.insertarProducto);
 router.get('/habilitar-producto/:id', productController.updateEstadoProducto);
 router.get('/edit-producto/:id', productController.obtenerProducto);
 router.post('/edit-producto/:id', productController.updateProducto);
+router.get('/delete-producto/:id', productController.deleteProducto); //se manda a eliminar mediante un get
 
 
 /*router.get('/clientes', (req, res) => {

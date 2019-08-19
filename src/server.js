@@ -1,4 +1,5 @@
 const path = require('path');
+const morgan = require('morgan');
 const express = require('express');
 const app = express();
 var server = require('http').createServer(app);
@@ -12,6 +13,7 @@ const indexRoutes = require('./routes/route');
 app.set('port', process.env.PORT || 3500);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+//app.use(morgan('dev'));
 
 // middlewares
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +44,6 @@ io.on('connection', function (socket) {
         }]
       },
       responsive: true,
-
       // Configuration options go here
       options: {}
     })

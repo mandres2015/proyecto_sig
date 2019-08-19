@@ -18,20 +18,20 @@
                 <!--CARD-BODY-->
                 <div class="body-clients py-2 px-3">
                     <!-- FORMULARIO AGREGAR CLIENTES -->
-                    <form action="/add-cliente" method="POST" id="add-client">
+                    <form action="/add-cliente" method="POST" id="add-client" onsubmit="alert('Cliente agregado')">
                         <!--INICIO BUSCAR CLIENTE -->
                         <div class="row border border-dark p-3 rounded">
                             <div class="form-group col-12 col-md-4 px-0">
                                 <!--CEDULA-->
                                 <label for="lblcedulaCli" class="mb-0 font-weight-bold">Cédula/DNI</label>
                                 <input type="text" class="form-control" name="cedulaCli" id="cedulaCli"
-                                    placeholder="Cédula">
+                                    placeholder="Cédula" required>
                             </div>
                             <div class="form-group col-12 col-md-3 ml-auto px-0">
                                 <!--OPTS CIUDAD-->
                                 <label for="lblciudadCli" class="mb-0 font-weight-bold">Ciudad</label>
-                                <select class="form-control" name="ciudadCli" id="ciudadCli">Escoja ciudad
-                                    <option value="default">Seleccione ciudad</option>
+                                <select class="form-control" name="ciudadCli" id="ciudadCli" required>Escoja ciudad
+                                    <option value="">Seleccione ciudad</option>
                                     <option value="Machala">Machala</option>
                                     <option value="Pasaje">Pasaje</option>
                                     <option value="Huaquillas">Huaquillas</option>
@@ -41,14 +41,14 @@
                                 <!--DIRECCION-->
                                 <label for="lbladdressCli" class="mb-0 font-weight-bold">Dirección</label>
                                 <input type="text" rows="1" class="form-control" name="direccionCli" id="direccionCli"
-                                    placeholder="Dirección">
+                                    placeholder="Dirección" required>
                             </div>
 
                             <div class="form-group col-12 col-md-4  pl-0 pr-0">
                                 <!--NOMBRES-->
                                 <label for="lblnombresCli" class="mb-0 font-weight-bold">Nombres y apellidos</label>
                                 <input type="text" class="form-control" name="nombresCli" id="nombresCli"
-                                    placeholder="Nombres">
+                                    placeholder="Nombres" required>
                             </div>
                             <!--APELLIDOS
                             <div class="form-group col-12 col-md-4 ml-auto px-0">
@@ -61,7 +61,7 @@
                                 <!--TELEFONO-->
                                 <label for="lblphoneCli" class="mb-0 font-weight-bold">Teléfono</label>
                                 <input type="text" class="form-control" name="telefonoCli" id="telefonoCli"
-                                    placeholder="Teléfono">
+                                    placeholder="Teléfono" required>
                             </div>
 
 
@@ -69,7 +69,7 @@
                                 <!--CORREO ELECTRONICO-->
                                 <label for="lblemail" class="mb-0 font-weight-bold">Correo</label>
                                 <input type="email" class="form-control" name="correoCli" id="correoCli"
-                                    placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                    placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                             </div>
                             <button type="submit" class="form-control btn btn-info mt-4"><i
                                     class="fas fa-user-plus"></i>&nbsp; Agregar</button>
@@ -79,7 +79,21 @@
 
                 <!-- TABLA CLIENTES -->
                 <div class="row my-4">
-                    <h1 class="h3 mb-0 pl-3 col-6 my-auto ">Clientes registrados</h1>
+                    <div class="input-group col-12 col-md-6 px-0 mr-auto mb-2">
+                        <h1 class="h3 mb-0 pl-3 col-6 my-auto ">Clientes registrados</h1>
+                    </div>
+                    <!--Buscador-->
+                    <div class="input-group col-12 col-md-6 px-0 mr-auto mb-2">
+                        <input type="text" class="autocomplete form-control text-truncate rounded-left"
+                            name="clientSearch" id="clientSearch" placeholder="Buscar por cédula o nombres">
+                        <div class="input-group-append" id="btnBuscarCli" style="height: 38px;">
+                            <button class="btn btn-outline-secondary" type="button" data-toggle="tooltip"
+                                data-placement="bottom" title="Buscar cliente">
+                                <li class="fa fa-search input-icon"></li><span class="d-none d-md-inline"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <!--Tabla de clientes-->
                     <div class="table-wrapper-scroll-y my-custom-scrollbar-cliente">
                         <table class="table table-bordered table-hover" id="tableProducts" name="tableProducts">
                             <thead class="text-center">
@@ -97,22 +111,24 @@
                                 <% for (var i=0; i<clientes.rows.length; i++) { %>
                                 <tr>
                                     <td class="text"><%= clientes.rows[i][0] %></td>
-                                    <td class="text-truncate"><%= clientes.rows[i][1] %>&nbsp;<%= clientes.rows[i][2] %>
-                                    </td>
+                                    <td class="text-truncate"><%= clientes.rows[i][1] %></td>
                                     <td class="text-truncate"><%= clientes.rows[i][3] %></td>
                                     <td class="text-truncate"><%= clientes.rows[i][4] %></td>
                                     <td class="text-truncate"><%= clientes.rows[i][5] %></td>
                                     <td class="text-truncate"><%= clientes.rows[i][6] %></td>
 
-                                    <% if (user.admin == true ) { %><!--Hacer esto si el usuario es admin-->
+                                    <% if (user.admin == true ) { %>
+                                    <!--Hacer esto si el usuario es admin-->
                                     <td class="text-center py-2">
                                         <a href="/habilitar-cliente/<%= clientes.rows[i][0] %>"
-                                            class="btn <%= clientes.rows[i][7]==='1'? 'btn-success': 'btn-dark' %>">
+                                            class="btn <%= clientes.rows[i][7]==='1'? 'btn-success': 'btn-danger' %>">
                                             <i
-                                                class="fa <%= clientes.rows[i][7]==='1'? 'fas fa-user-minus': 'fa-user-check' %> button-table mr-1"></i><%= clientes.rows[i][7]==='1'? 'Desabilitar': 'Habilitar' %>
+                                                class="fa <%= clientes.rows[i][7]==='1'? 'fas fa-user-minus': 'fa-user-check' %> button-table mr-1"></i>
+                                            <!--<%= clientes.rows[i][7]==='1'? 'Desabilitar': 'Habilitar' %>-->
                                         </a>
 
-                                        <a href="/edit-cliente/<%= clientes.rows[i][0] %>" class="btn btn-info btn-sm mx-auto">
+                                        <a href="/edit-cliente/<%= clientes.rows[i][0] %>"
+                                            class="btn btn-info btn-sm mx-auto">
                                             <i class="fa fa-pencil-alt button-table"></i>
                                         </a>
                                         <!--<button type="button" class="btn btn-info btn-sm mx-auto" name="btnEliminarPro"

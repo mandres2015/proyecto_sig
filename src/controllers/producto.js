@@ -8,7 +8,7 @@ var oracle = require('../bd/oracle-db');
  * 0: deshabilitado
  * select column_name from all_tab_columns where table_name = 'nombre_tabla_buscada' para obtner las columnas de una tabla
  */
-
+// listado de productos
 ctrl.listarProductos = async (req, res) => {
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
@@ -24,15 +24,16 @@ ctrl.listarProductos = async (req, res) => {
         });
     });
 }
+//insertar productos
 ctrl.insertarProducto = async (req, res) => {
     var params = req.body;
     console.log(params);
-    const opts = [params.codeProd, params.nameProd, params.descriptionProd, parseFloat(params.precioProd), parseFloat(params.cantProd), params.estadoProd, params.ciudadProd, params.categoriaProd, parseInt(params.umedida), params.proveedorProd ]
+    var estado = params.estadoProd;
+    estado = cambiaEstadoProd(estado);
+    console.log('nuevo estado:'+estado);
+    const opts = [params.codeProd, params.nameProd, params.descriptionProd, parseFloat(params.precioProd), parseFloat(params.cantProd), estado, params.ciudadProd, params.categoriaProd, parseInt(params.umedida), params.proveedorProd ]
     console.log(opts);
     var sql = `INSERT INTO PRODUCTO(ID, NOMBRE, DESCRIPCION, PRECIO, CANTIDAD_STOCK, ESTADO, SUCURSAL, CATEGORIA, U_MEDIDA, PROVEEDOR) VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i, :j)`
-    
-    //oracle.executeOptions(`INSERT INTO "SYSTEM"."FACTURA" (ID, CLIENTE, IVA, DESCUENTO, SUBTOTAL, TOTAL, ESTADO, FORMA_DE_PAGO, FECHA) VALUES (:a,:b,:c,:d,:e,:f,:g,:h,:i)`, opts, { autoCommit: true }, (ex, bill) => {
-    //console.log(sql); //imprimiendo la consulta de inserción
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
         //Ejecutar la inserción en BD
@@ -52,6 +53,14 @@ ctrl.insertarProducto = async (req, res) => {
         });
     });
 }
+
+//cambiar el estado para enviar a BD, si es 'on' cambia a '1', si es 'off' cambia a '0'
+function cambiaEstadoProd(estado){
+    estado=='on' || estado=='true'? estado='1': estado='0';
+    return estado;
+}
+
+//obtener un solo producto para editar
 ctrl.obtenerProducto = async (req, res) => {
     const { id } = req.params;
     console.log('id recibido para actualizar: ' + id);
@@ -68,12 +77,16 @@ ctrl.obtenerProducto = async (req, res) => {
     });
 }
 ctrl.updateProducto = async (req, res) => {
-    console.log(req.body);
-    console.log(req.params);
-    var params = req.body;
-    const opts = [params.nameProd, params.descriptionProd, params.precioProd, params.cantProd, params.estadoProd, params.ciudadProd, params.categoriaProd, params.umedida, params.proveedorProd, req.params.id ]
-    var sql = `UPDATE CLIENTE SET NOMBRE = :a, DESCRIPCION = :b, PRECIO = :c, CANTIDAD_STOCK = :d, ESTADO = :e, SUCURSAL = :f, CATEGORIA = :g, U_MEDIDA = :h, PROVEEDOR = :i
-    WHERE ID=:j`
+    //console.log(req.body);
+    console.log('params');
+    console.log(req.params); //recibe el id
+    var params = req.body; //recibe los campos enviados en el post
+    console.log('nuevos cambios');
+    console.log(params);
+    var estado = params.estadoProd;
+    estado = cambiaEstadoProd(estado);
+    const opts = [params.nameProd, params.descriptionProd, parseFloat(params.precioProd), parseFloat(params.cantProd), estado, params.ciudadProd, params.categoriaProd, parseInt(params.umedida), params.proveedorProd, req.params.id ]
+    var sql = `UPDATE PRODUCTO SET NOMBRE = :a, DESCRIPCION = :b, PRECIO = :c, CANTIDAD_STOCK = :d, ESTADO = :e, SUCURSAL = :f, CATEGORIA = :g, U_MEDIDA = :h, PROVEEDOR = :i WHERE ID = :j`
     console.log(sql, opts);
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
@@ -93,6 +106,28 @@ ctrl.updateProducto = async (req, res) => {
         });
     });
 }
+
+ctrl.deleteProducto = async(req, res)=>{
+    const {id} = req.params;
+    var opts = [id];
+    console.log('id recibido para actualizar: ' + id);
+    const sql = `DELETE FROM PRODUCTO WHERE ID = :a`;
+    oracle.connect().then((err)=>{
+        if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
+        oracle.executeOptions(sql, opts, {autoCommit:true}, (err, result)=>{
+            if(!err){
+                console.log('Producto eliminado:');
+                console.log(result);
+                res.redirect('/productos');
+            }else{
+                console.log(err+'\nNo se ha podido eliminar');
+                oracle.close();
+                res.redirect('/')
+            }
+        })
+    })
+}
+
 ctrl.updateEstadoProducto = async (req, res) => {
     const { id } = req.params;
     var opts = [id];
@@ -129,6 +164,8 @@ function cambiarEstado(estado) {
     estado.rows[0][0] === '1' ? estado = '0' : estado = '1';
     return estado;
 }
+
+
 
 
 
