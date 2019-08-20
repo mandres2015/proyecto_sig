@@ -4,14 +4,30 @@ var oracle = require('../bd/oracle-db');
  * El controlador de la tabla cliente.
  * Se puede hacer todo lo que se desea con el cliente en la BD
  */
+function obtenerCategorias(req, res){
+    oracle.connect().then((err)=>{
+        if(err) return res.status(200).send({message: 'Ha ocurrido un error'});
+
+        //Ejecutar la consulta
+        oracle.execute("SELECT * FROM CATEGORIA", [], (err, categorias)=>{
+            if(!err){
+                return categorias;
+            }else{
+                console.log(err+'\nNo se pudo obtener el listado de categorias');
+                return res.status(404).send({message: 'No se obtuvieron categorias'});
+            }
+        });
+    });
+}
+
 ctrl.listarClientes = async (req, res) => {
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
-
+        categorias = obtenerCategorias(req, res); //Se obtienen las categorías
         //Ejecutar la consulta
         oracle.execute("SELECT * FROM CLIENTE", [], (err, clientes) => {
             if (!err) {
-                res.render('clientes', { clientes, user: req.session });
+                res.render('clientes', { clientes, categorias, user: req.session });
             } else {
                 console.log(err + '\nNo se ha entrado al listado de clientes');
                 res.redirect('/');

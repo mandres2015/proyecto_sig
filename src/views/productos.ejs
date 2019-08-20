@@ -41,7 +41,7 @@
                                     <option value="Pinturas">Pinturas</option>
                                 </select>
                             </div>
-                            <div class="form-group col-12 col-md-6 pr-0 ">
+                            <!--<div class="form-group col-12 col-md-6 pr-0 ">
                                 <label for="descriptionProd" class="col-12 pl-0 mb-0">Ubicación:</label>
                                 <select class="form-control" name="ciudadProd" id="ciudadProd" required>Escoja sucursal
                                     <option value="">Seleccione ciudad</option>
@@ -50,6 +50,7 @@
                                     <option value="Huaquillas">Huaquillas</option>
                                 </select>
                             </div>
+                            -->
                             <div class="form-group col-12 col-md-6 pr-0 ">
                                 <label for="umedidaProd" class="col-6 pl-0 mb-0 ml-auto">U. Medida:</label>
                                 <select class=" form group form-control" name="umedida" id="umedida" required>
@@ -75,10 +76,10 @@
                                 <input type="number" min="0" step=".01" class="form-control" name="precioProd"
                                     id="precioProd" required>
                             </div>
-                            <div class="form-group col-12 col-md-4 pr-0 ">
+                            <!--<div class="form-group col-12 col-md-4 pr-0 ">
                                 <label for="proveedorProd" class="col-12 pl-0 mb-0">Proveedor:</label>
                                 <input type="text" class="form-control" name="proveedorProd" id="proveedorProd" required>
-                            </div>
+                            </div>-->
                             <div class="row mt-4">
                                 <div class="row">
                                     <div class="form-group col-12 col-md-12 pr-0 ">
@@ -117,7 +118,7 @@
                                     <th scope="col">Categoria</th>
                                     <th scope="col">P. venta</th>
                                     <th scope="col">Cantidad</th>
-                                    <th scope="col">Sucursal</th>
+                                    
                                     <th scope="col">Visible</th>
                                     <th scope="col">Opciones</th>
                                 </tr>
@@ -130,7 +131,7 @@
                                     <td class="text-truncate"><%= productos.rows[i][7] %></td>
                                     <td class="text-truncate"><%= productos.rows[i][3] %></td>
                                     <td class="text-truncate"><%= productos.rows[i][4] %></td>
-                                    <td class="text-truncate"><%= productos.rows[i][6] %></td>
+                                    
                                     <td class="text-truncate"><%= productos.rows[i][5]=='1'? 'Si': 'No' %></td>
                                     <td class="text-center py-2">
                                         

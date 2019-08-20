@@ -27,13 +27,13 @@ ctrl.listarProductos = async (req, res) => {
 //insertar productos
 ctrl.insertarProducto = async (req, res) => {
     var params = req.body;
-    console.log(params);
+    //console.log(params);
     var estado = params.estadoProd;
     estado = cambiaEstadoProd(estado);
-    console.log('nuevo estado:'+estado);
-    const opts = [params.codeProd, params.nameProd, params.descriptionProd, parseFloat(params.precioProd), parseFloat(params.cantProd), estado, params.ciudadProd, params.categoriaProd, parseInt(params.umedida), params.proveedorProd ]
-    console.log(opts);
-    var sql = `INSERT INTO PRODUCTO(ID, NOMBRE, DESCRIPCION, PRECIO, CANTIDAD_STOCK, ESTADO, SUCURSAL, CATEGORIA, U_MEDIDA, PROVEEDOR) VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i, :j)`
+    //console.log('nuevo estado:' + estado);
+    const opts = [params.codeProd, params.nameProd, params.descriptionProd, parseFloat(params.precioProd), parseFloat(params.cantProd), estado, params.categoriaProd, parseInt(params.umedida), req.session.sucursal]
+    //console.log(opts);
+    var sql = `INSERT INTO PRODUCTO(ID, NOMBRE, DESCRIPCION, PRECIO, CANTIDAD_STOCK, ESTADO, CATEGORIA, U_MEDIDA, SUCURSAL) VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i)`
     oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
         //Ejecutar la inserción en BD
@@ -45,6 +45,7 @@ ctrl.insertarProducto = async (req, res) => {
                     if (!err) res.render('productos', { productos, user: req.session });
                 });
             } else {
+                //if(!result) res.status(200).send({message: 'Ya existe producto con el mismo codigo'})
                 console.log(result);
                 console.log(err + '\nNo se ha podido ingresar el registro');
                 oracle.close();
@@ -55,8 +56,8 @@ ctrl.insertarProducto = async (req, res) => {
 }
 
 //cambiar el estado para enviar a BD, si es 'on' cambia a '1', si es 'off' cambia a '0'
-function cambiaEstadoProd(estado){
-    estado=='on' || estado=='true'? estado='1': estado='0';
+function cambiaEstadoProd(estado) {
+    estado == 'on' || estado == 'true' ? estado = '1' : estado = '0';
     return estado;
 }
 
@@ -85,7 +86,7 @@ ctrl.updateProducto = async (req, res) => {
     console.log(params);
     var estado = params.estadoProd;
     estado = cambiaEstadoProd(estado);
-    const opts = [params.nameProd, params.descriptionProd, parseFloat(params.precioProd), parseFloat(params.cantProd), estado, params.ciudadProd, params.categoriaProd, parseInt(params.umedida), params.proveedorProd, req.params.id ]
+    const opts = [params.nameProd, params.descriptionProd, parseFloat(params.precioProd), parseFloat(params.cantProd), estado, params.ciudadProd, params.categoriaProd, parseInt(params.umedida), params.proveedorProd, req.params.id]
     var sql = `UPDATE PRODUCTO SET NOMBRE = :a, DESCRIPCION = :b, PRECIO = :c, CANTIDAD_STOCK = :d, ESTADO = :e, SUCURSAL = :f, CATEGORIA = :g, U_MEDIDA = :h, PROVEEDOR = :i WHERE ID = :j`
     console.log(sql, opts);
     oracle.connect().then((err) => {
@@ -107,20 +108,20 @@ ctrl.updateProducto = async (req, res) => {
     });
 }
 
-ctrl.deleteProducto = async(req, res)=>{
-    const {id} = req.params;
+ctrl.deleteProducto = async (req, res) => {
+    const { id } = req.params;
     var opts = [id];
     console.log('id recibido para actualizar: ' + id);
     const sql = `DELETE FROM PRODUCTO WHERE ID = :a`;
-    oracle.connect().then((err)=>{
+    oracle.connect().then((err) => {
         if (err) return res.status(200).send({ message: 'Ha ocurrido un error' });
-        oracle.executeOptions(sql, opts, {autoCommit:true}, (err, result)=>{
-            if(!err){
+        oracle.executeOptions(sql, opts, { autoCommit: true }, (err, result) => {
+            if (!err) {
                 console.log('Producto eliminado:');
                 console.log(result);
                 res.redirect('/productos');
-            }else{
-                console.log(err+'\nNo se ha podido eliminar');
+            } else {
+                console.log(err + '\nNo se ha podido eliminar');
                 oracle.close();
                 res.redirect('/')
             }
