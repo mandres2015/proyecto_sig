@@ -29,7 +29,7 @@
                                 <h1 class="col-12 h2 text-center font-color-castro mb-2">LOGIN</h1>
                                 <label class="col-10 mx-auto mb-3">
                                     USUARIO
-                                    <input type="text" name="user" class="form-control" required>
+                                    <input type="text" name="user" class="form-control" required autofocus>
                                 </label>
                                 <label class="col-10 mx-auto">
                                     CONTRASEÑA
@@ -44,4 +44,8 @@
             </div>
         </div>
     </div>
- <% include footer %>
+
+    <div id="modalmsg"></div>
+    <% include complements %>
+    <script src="/js/login-reg.js"></script>
+    <% include footer %>

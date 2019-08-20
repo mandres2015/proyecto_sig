@@ -71,11 +71,23 @@
                                                     <option value="other">Personal</option>
                                                 </select>
                                             </label>
-                                            <input class="mt-3 btn-white btn-lg btn-outline-dark mx-auto" type="button"
-                                                name="btnCancel" id="btnCancel" value="CANCELAR"
+                                            <label class="col-12">SUCURSAL
+                                                <select name="sucursal" id="sucursal" class="custom-select">
+                                                    <% for(var i=0; i < sucursales.length; i++) { %>
+                                                    <option value="<%= sucursales[i][0] %>"><%= sucursales[i][0] %>
+                                                    </option>
+                                                    <% } %>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <input class="mt-3 btn-white btn-lg btn-outline-danger mx-auto"
+                                                type="button" name="btnCancel" id="btnCancel" value="CANCELAR"
                                                 onclick="location.href='/'">
-                                            <input class="mt-3 btn-white btn-lg btn-outline-dark mx-auto" type="submit"
-                                                name="btnLogin" id="btnLogin" value="REGISTRAR">
+                                            <input class="mt-3 btn-white btn-lg btn-outline-success mx-auto"
+                                                type="submit" name="btnLogin" id="btnLogin" value="REGISTRAR">
                                         </div>
                                     </div>
                                 </div>
@@ -86,4 +98,8 @@
             </div>
         </div>
     </div>
+
+    <div id="modalmsg"></div>
+    <% include complements %>
+    <script src="/js/login-reg.js"></script>
     <% include footer %>
