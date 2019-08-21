@@ -1,0 +1,197 @@
+.bg-navbar {
+    background: #F29702;
+    height: 65px;
+    z-index: 4;
+}
+
+html{
+    background: #F1EFEF;
+}
+
+.input-group-append .btn {
+    z-index: inherit;
+}
+
+.dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 245px;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    background-color: #423E3F;
+    overflow-x: hidden;
+}
+
+.sidenav a {
+    padding: 8px 20px 8px 20px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #F1F1F1;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #AA8850;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.fa {
+    font-size: 20px;
+}
+
+.component {
+    margin-left: 245px;
+    margin-top: calc(65px + 16px);
+    min-height: calc(100vh - 65px);
+    background-color: #F1EFEF;
+    margin-bottom: 16px;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.input-icon {
+    font-size: 16px;
+}
+
+#txtFactura {
+    border-radius: 50px;
+}
+
+.form-group {
+    margin-bottom: 4px;
+}
+
+.logo {
+    height: 65px;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    width: 100%;
+    height: 175px;
+    overflow: auto;
+}
+
+.my-custom-scrollbar-cliente {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.table {
+    table-layout: fixed;
+    margin-bottom: 0;
+}
+
+.button-table {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+/*the container must be positioned relative:*/
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+
+input {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.autocomplete-items {
+    position: absolute;
+    z-index: 1;
+    max-height: 180px;
+    overflow-y: auto;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #d4d4d4;
+    border-top: none;
+}
+
+.autocomplete-items div:last-child {
+    border-bottom: 0;
+}
+
+/*when hovering an item:*/
+
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+.inputQuant{
+    background-color: white;
+}
+
+.inputQuant:hover{background-color: rgba(0,0,0,.5);}
+
+.component-fliud{
+    height: 100vh;
+    background-color: #eeeeee;
+}
+
+.bg-login{
+    background-color: #F29702;
+}
+
+.font-color-castro{
+    color: #F29702;
+}
+
+.h-100vh{
+    height: 100vh;
+}
+
+.btn-white{
+    background: white;
+}

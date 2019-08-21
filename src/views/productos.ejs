@@ -1,0 +1,156 @@
+<% include header %>
+
+<% include menu-left %>
+
+<div class="component">
+    <div class="container">
+        <!-- CONTENEDOR -->
+        <div class="card my-3 shadow">
+            <!-- CABECERA -->
+            <div class="card-header header-sales">
+                <div class="row">
+                    <h1 class="h3 mb-0 pl-3 col-6 my-auto">PRODUCTOS</h1>
+                </div>
+            </div>
+            <!-- COMPONENTES -->
+            <div class="card-body">
+                <div class="body-sales py-2 px-3">
+                    <form action="/add-producto" method="POST" id="add-producto">
+                        <!-- PRODUCTOS -->
+                        <div class="row mt-4 border border-dark p-3 rounded">
+                            <!--idProducto podría ser el codigo de barras o cualquiera asignado por la ferreteria-->
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="codePro" class="col-12 pl-0 mb-0">Codigo:</label>
+                                <input type="text" class="form-control" name="codeProd" id="codePro" required>
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="nameProd" class="col-12 pl-0 mb-0">Producto:</label>
+                                <input type="text" class="form-control" name="nameProd" id="nameProd" required>
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="descriptionProd" class="col-12 pl-0 mb-0">Descripción:</label>
+                                <input type="text" class="form-control" name="descriptionProd" id="descriptionProd" required>
+                            </div>
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="categoriaProd" class="col-12 pl-0 mb-0">Categoria:</label>
+                                <select class="form-control" name="categoriaProd" id="categoriaProd" required>Escoja categoria
+                                    <option value="General">General</option>
+                                    <option value="Herramienta">Herramienta</option>
+                                    <option value="Electrico">Electrico</option>
+                                    <option value="Ceramica">Ceramica</option>
+                                    <option value="Pinturas">Pinturas</option>
+                                </select>
+                            </div>
+                            <!--<div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="descriptionProd" class="col-12 pl-0 mb-0">Ubicación:</label>
+                                <select class="form-control" name="ciudadProd" id="ciudadProd" required>Escoja sucursal
+                                    <option value="">Seleccione ciudad</option>
+                                    <option value="Machala">Machala</option>
+                                    <option value="Pasaje">Pasaje</option>
+                                    <option value="Huaquillas">Huaquillas</option>
+                                </select>
+                            </div>
+                            -->
+                            <div class="form-group col-12 col-md-6 pr-0 ">
+                                <label for="umedidaProd" class="col-6 pl-0 mb-0 ml-auto">U. Medida:</label>
+                                <select class=" form group form-control" name="umedida" id="umedida" required>
+                                    <option value="0">Seleccione unidad</option>
+                                    <option value="1">Pieza</option>
+                                    <option value="2">Kit</option>
+                                    <option value="3">Caja</option>
+                                    <option value="4">Juego</option>
+                                    <option value="5">Kilos</option>
+                                    <option value="6">Libras</option>
+                                    <option value="7">Litros</option>
+                                    <option value="8">Galones</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12 col-md-3 pr-0">
+                                <label class="mb-0">Cantidad:
+                                    <input type="number" class="form-control" name="cantProd" id="cantProd" min="1"
+                                        value="1" onclick="this.select()">
+                                </label>
+                            </div>
+                            <div class="form-group col-4 col-md-3 pr-0 ">
+                                <label for="precioProd" class="col-12 pl-0 mb-0">Precio:</label>
+                                <input type="number" min="0" step=".01" class="form-control" name="precioProd"
+                                    id="precioProd" required>
+                            </div>
+                            <!--<div class="form-group col-12 col-md-4 pr-0 ">
+                                <label for="proveedorProd" class="col-12 pl-0 mb-0">Proveedor:</label>
+                                <input type="text" class="form-control" name="proveedorProd" id="proveedorProd" required>
+                            </div>-->
+                            <div class="row mt-4">
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-12 pr-0 ">
+                                        <input type="checkbox" name="estadoProd" id="estadoProd" checked required>&nbsp; Es visible<br>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="form-control btn btn-info mt-4" name="addProd" id="addProd"><i
+                                    class="fas fa-plus"></i>&nbsp;Agregar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- TABLA PRODUCTOS -->
+                <div class="row my-4">
+                    <div class="input-group col-12 col-md-6 px-0 mr-auto mb-2">
+                        <h1 class="h3 mb-0 pl-3 col-12 ">Lista de productos</h1>
+                    </div>
+                    <!--<label for="productSearch" class="h3 col-12 pl-3 mb-0 ">Lista de productos</label>-->
+                    <div class="input-group col-12 col-md-6 px-0 mr-auto mb-2">
+                        <input type="text" class="autocomplete form-control text-truncate rounded-left"
+                            name="productSearch" id="productSearch" placeholder="Buscar por código o nombre">
+                        <div class="input-group-append" id="btnBuscarPro" style="height: 38px;">
+                            <button class="btn btn-outline-secondary" type="button" data-toggle="tooltip"
+                                data-placement="bottom" title="Buscar producto">
+                                <li class="fa fa-search input-icon"></li><span class="d-none d-md-inline"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-bordered table-hover" id="tableProducts" name="tableProducts">
+                            <thead class="text-center">
+                                <tr>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Articulo</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">P. venta</th>
+                                    <th scope="col">Cantidad</th>
+                                    
+                                    <th scope="col">Visible</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (var i=0; i<productos.rows.length; i++) { %>
+                                <tr>
+                                    <td class="text-truncate"><%= productos.rows[i][0] %></td>
+                                    <td class="text-truncate"><%= productos.rows[i][1] %></td>
+                                    <td class="text-truncate"><%= productos.rows[i][7] %></td>
+                                    <td class="text-truncate"><%= productos.rows[i][3] %></td>
+                                    <td class="text-truncate"><%= productos.rows[i][4] %></td>
+                                    
+                                    <td class="text-truncate"><%= productos.rows[i][5]=='1'? 'Si': 'No' %></td>
+                                    <td class="text-center py-2">
+                                        
+                                        <a href="/edit-producto/<%= productos.rows[i][0]%>" class="btn btn-info btn-sm mx-auto">
+                                        <span class="fa fa-pencil-alt button-table"></span></a>
+                                        <a href="/delete-producto/<%= productos.rows[i][0] %>" class="btn btn-danger btn-sm mx-auto"
+                                            name="btnEliminarPro" id="btnEditarPro" value="-"><span
+                                                class="fa fa-times button-table"></span></a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include complements %>
+<% include footer %>

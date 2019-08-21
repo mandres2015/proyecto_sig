@@ -1,0 +1,50 @@
+<% include header %>
+
+<% include menu-left %>
+
+<div class="component">
+    <div class="container">
+        <div class="card mb-4">
+            <div class="top-products row p-4">
+                <div class="col-12 m-0 p-0 d-flex justify-content-between">
+                    <h1 class="h4">TOP 5 PRODUCTOS MÁS VENDIDOS</h1>
+                    <select class="col-4 custom-select" name="sucursalTopFive" id="sucursalTopFive">
+                        <option value="MATRIZ">MATRIZ</option>
+                        <option value="SUCURSAL 1">SUCURSAL 1</option>
+                    </select>
+                </div>
+                <div id="TopProduct" class="col-lg-12"></div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="top-products row p-4">
+                <div class="col-12 m-0 p-0 d-flex justify-content-between">
+                    <h1 class="h4">MÉTODO DE PAGO MAS UTILIZADO</h1>
+                    <select class="col-4 custom-select" name="sucursalTopFiveGains" id="sucursalTopFiveGains">
+                        <option value="MATRIZ">MATRIZ</option>
+                        <option value="SUCURSAL 1">SUCURSAL 1</option>
+                    </select>
+                </div>
+                <div id="TopProductGains" class="col-lg-12"></div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="top-products row p-4">
+                <div class="col-12 m-0 p-0 d-flex justify-content-between">
+                    <h1 class="h4">TOTAL VENTAS REALIZADAS</h1>
+                    <select class="col-4 custom-select" name="salePeriod" id="salePeriod">
+                        <option value="1">MES</option>
+                        <option value="3">TRIMESTRE</option>
+                        <option value="6">SEMESTRE</option>
+                        <option value="12">AÑO</option>
+                    </select>
+                </div>
+                <div id="TopSale" class="col-lg-12"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include complements %>
+<script src="/js/stats.js"></script>
+<% include footer %>
