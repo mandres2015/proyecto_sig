@@ -16,6 +16,11 @@
     <a href="/productos" class=" my-2">
         <li class="fa fa-capsules"></li>&nbsp;Productos
     </a>
+    <% if (user.admin == "personal") { %>
+    <a href="/seguimiento" class=" my-2">
+        <li class="fa fa-chart-area"></li>&nbsp;Seguimiento
+    </a>
+    <% } %>
     <% if (user.admin == true) { %>
     <div class="my-auto" style="position:absolute;bottom:5px;">
         <a href="/register" class=" my-2">

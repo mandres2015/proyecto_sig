@@ -72,6 +72,9 @@ const registerController = require('../controllers/register')
 router.get('/register', registerController.getRegister)
 router.post('/register', registerController.postRegister)
 
+const seguimientoController = require('../controllers/seguimiento')
+router.get('/seguimiento', seguimientoController.getSeguimiento)
+
 
 // LOGIN
 const loginController = require('../controllers/login')

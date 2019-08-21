@@ -1,0 +1,26 @@
+<% include header %>
+
+<% include menu-left %>
+
+<div class="component">
+    <div class="container">
+        <div class="card mb-4">
+            <div class="top-products row p-4">
+                <div class="col-12 m-0 p-0 d-flex justify-content-between">
+                    <h1 class="h4">OBJETIVO DE VENTAS ANUALES</h1>
+                    <span class="h6" id="valor">$2580</span>
+                    <select class="col-4 custom-select" name="sucursalTopFive" id="sucursalTopFive">
+                        <option value="MATRIZ">MATRIZ</option>
+                        <option value="SUCURSAL 1">SUCURSAL 1</option>
+                        <option value="SUCURSAL 2">SUCURSAL 2</option>
+                    </select>
+                </div>
+                <div id="TopProduct" class="col-lg-12"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include complements %>
+<script src="/js/seguimiento.js"></script>
+<% include footer %>

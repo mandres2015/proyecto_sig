@@ -31,7 +31,12 @@ ctrl.postLogin = async (req, res) => {
                                     req.session.admin = true
                                 }
                                 else {
-                                    req.session.admin = false
+                                    if (resp2.rows[0][0] === "personal") {
+                                        req.session.admin = "personal"
+                                    }
+                                    else{
+                                        req.session.admin = false
+                                    }
                                 }
                                 res.send('ok')
                             }

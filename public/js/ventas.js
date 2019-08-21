@@ -61,7 +61,7 @@ function autocompleteClient(inp, arr) {
         /*create a DIV element for each matching element:*/
         b = document.createElement("DIV")
         /*make the matching letters bold:*/
-        b.innerHTML += client[0] + " - " + client[1] + " " + client[2]
+        b.innerHTML += client[0] + " - " + client[1]
         /*insert a input field that will hold the current array item's value:*/
         b.innerHTML += "<input type='hidden' value='" + client[0] + "'>"
         /*execute a function when someone clicks on the item value (DIV element):*/

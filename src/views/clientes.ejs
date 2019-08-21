@@ -25,7 +25,11 @@
                                 <!--CEDULA-->
                                 <label for="lblcedulaCli" class="mb-0 font-weight-bold">Cédula/DNI</label>
                                 <input type="text" class="form-control" name="cedulaCli" id="cedulaCli"
-                                    placeholder="Cédula" required>
+                                    placeholder="Cédula" minlength="10" maxlength="10" required pattern="[0-9]{10}$"
+                                    oninput="validarSiNumero(this.value);">
+                                <div class="toast">
+                                    <p>Debe ingresar sólo números</p>
+                                </div>
                             </div>
                             <div class="form-group col-12 col-md-3 ml-auto px-0">
                                 <!--OPTS CIUDAD-->
@@ -149,6 +153,19 @@
         </div>
     </div>
 </div>
+
+<script>
+    function validarSiNumero(numero) {
+        if (!/^([0-9])*$/.test(numero))
+            //alert("Debe ingresar sólo números");
+            $('.toast').toast('show');
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('.toast').hide();// toast("hide");
+    });
+</script>
 
 <% include complements %>
 <% include footer %>
